@@ -11,12 +11,14 @@ class ApiRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullname' => 'required',
+            'customer_name' => 'required',
+            'company_name' => 'required',
+            'vehical_name' => 'required',
+            'service_type' => 'required',
             'email' => 'required|email:rfc,dns|unique:users,email',
-            'phone' => 'required|unique:users,phone|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'password' => 'required|min:8|required_with:c_password|same:c_password|strong_password',
-            'c_password' => 'required|min:8',
-            'about' => 'required',
+            'customer_mobile' => 'required|unique:users,customer_mobile|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'password' => 'required|min:8|required_with:customer_cpassword|same:customer_cpassword|strong_password',
+            'customer_cpassword' => 'required|min:8',
             'user_type' => 'required'
         ];
     }
@@ -24,16 +26,18 @@ class ApiRegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'fullname.required' => __('validation.required', ['attribute' => 'Full Name']),
-            'about.required' => __('validation.required', ['attribute' => 'About']),
+            'customer_name.required' => __('validation.required', ['attribute' => 'customer name']),
+            'company_name.required' => __('validation.required', ['attribute' => 'company name']),
+            'vehical_name.required' => __('validation.required', ['attribute' => 'vehical name']),
             'user_type.required' => __('validation.required', ['attribute' => 'User type']),
-            'phone.required' => __('validation.required', ['attribute' => 'Phone']),
-            'email.required' => __('validation.required', ['attribute' => 'Email']),
-            'email.email' => __('validation.email', ['attribute' => 'Email']),
-            'email.unique' => __('validation.unique', ['attribute' => 'Email']),
-            'password.required' => __('validation.required', ['attribute' => 'Password']),
-            'password.strong_password' => __('validation.strong_password', ['attribute' => 'Password']),
-            'c_password.required' => __('validation.required', ['attribute' => 'Confirm Password']),
+            'service_type.required' => __('validation.required', ['attribute' => 'service type']),
+            'customer_mobile.required' => __('validation.required', ['attribute' => 'customer mobile']),
+            'email.required' => __('validation.required', ['attribute' => 'customer email']),
+            'email.email' => __('validation.email', ['attribute' => 'customer email']),
+            'email.unique' => __('validation.unique', ['attribute' => 'customer email']),
+            'password.required' => __('validation.required', ['attribute' => 'customer password']),
+            'customer_cpassword.strong_password' => __('validation.strong_password', ['attribute' => 'customer password']),
+            'customer_cpassword.required' => __('validation.required', ['attribute' => 'Confirm Password']),
         ];
     }
 

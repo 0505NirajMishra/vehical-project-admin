@@ -160,6 +160,54 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
         });
         Route::resource('/vehicalemployees',VehicalEmployeeController::class);
 
+        // customer deatil
+
+        Route::controller(CustomerDetailsController::class)->group(function () {
+            Route::get('/customerdetails/status/{id}/{status}', 'status')->name('customerdetails.status');
+            Route::get('/customerdetails/destroy/{id}/', 'destroy')->name('customerdetails.destroy');
+        });
+        Route::resource('/customerdetails',CustomerDetailsController::class);
+
+        // shop employee
+
+        Route::controller(ShopEmployeeController::class)->group(function () {
+            Route::get('/shopemployees/status/{id}/{status}', 'status')->name('shopemployees.status');
+            Route::get('/shopemployees/destroy/{id}/', 'destroy')->name('shopemployees.destroy');
+        });
+        Route::resource('/shopemployees',ShopEmployeeController::class);
+
+        // care 
+
+        Route::controller(CareController::class)->group(function () {
+            Route::get('/cares/status/{id}/{status}', 'status')->name('cares.status');
+            Route::get('/cares/destroy/{id}/', 'destroy')->name('cares.destroy');
+        });
+        Route::resource('/cares',CareController::class);
+
+        // feedback
+
+        Route::controller(FeedbackController::class)->group(function () {
+            Route::get('/feedbacks/status/{id}/{status}', 'status')->name('feedbacks.status');
+            Route::get('/feedbacks/destroy/{id}/', 'destroy')->name('feedbacks.destroy');
+        });
+        Route::resource('/feedbacks',FeedbackController::class);
+
+        // key unclock
+
+        Route::controller(KeyunlockController::class)->group(function () {
+            Route::get('/keyunlocks/status/{id}/{status}','status')->name('keyunlocks.status');
+            Route::get('/keyunlocks/destroy/{id}/','destroy')->name('keyunlocks.destroy');
+        });
+        Route::resource('/keyunlocks',KeyunlockController::class);
+
+        // twing
+
+        Route::controller(towingController::class)->group(function () {
+            Route::get('/towings/status/{id}/{status}','status')->name('towings.status');
+            Route::get('/towings/destroy/{id}/','destroy')->name('towings.destroy');
+        });
+        Route::resource('/towings',towingController::class);
+
         //Setting manager
         Route::controller(SettingController::class)->group(function () {
             Route::get('/settings/general', 'edit_general')->name('settings.edit_general');
@@ -167,4 +215,5 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
         });
         
     });
+
 });

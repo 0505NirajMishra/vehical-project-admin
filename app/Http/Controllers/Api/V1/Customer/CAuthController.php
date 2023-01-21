@@ -8,10 +8,13 @@ use App\Http\Requests\ApiConsultantLoginRequest;
 use App\Http\Requests\ApiRegisterRequest;
 
 use App\Http\Requests\Admin\HostelSerRequest;
-
 use App\Http\Requests\Admin\VehicalCategoryRequest;
-
 use App\Http\Requests\Admin\VehicalEmployeeRequest;
+use App\Http\Requests\Admin\FeedbackRequest;
+use App\Http\Requests\Admin\CustomerDetailRequest;
+use App\Http\Requests\Admin\KeyunlockRequest;
+use App\Http\Requests\Admin\TowingRequest;
+use App\Http\Requests\Admin\CareRequest;
 
 use App\Http\Requests\ApiChangePasswordRequest;
 use App\Http\Requests\ApiConsultantRequest;
@@ -36,8 +39,7 @@ class CAuthController extends Controller
         $this->apiAuthService = new AuthService();
     }
 
- 
-    
+
     public function login(ApiLoginRequest $request)
     {
         return $this->apiAuthService->login($request);
@@ -65,7 +67,6 @@ class CAuthController extends Controller
     {
         return $this->apiAuthService->addhostelappoinment($request);
     }
-
 
 
     // add vehical type 
@@ -110,8 +111,89 @@ class CAuthController extends Controller
         return $this->apiAuthService->getemployee();
     }
 
-    // delete vehical 
+    // get keyunlock 
 
+    public function getkeyunlock()
+    {
+        return $this->apiAuthService->getkeyunlock();
+    }
+
+    // add keyunlock
+
+    public function addkeyunlock(KeyunlockRequest $request)
+    {
+        return $this->apiAuthService->addkeyunlock($request);
+    }
+
+    // get towing
+    public function gettowing()
+    {
+        return $this->apiAuthService->gettowing();
+    }
+
+    // add towing
+    public function addtowing(TowingRequest $request)
+    {
+        return $this->apiAuthService->addtowing($request);
+    }
+ 
+
+    // get feedback list
+    public function getfeedback()
+    {
+        return $this->apiAuthService->getfeedback();
+    }
+
+    // add feedback 
+    public function addfeedback(FeedbackRequest $request)
+    {
+        return $this->apiAuthService->addfeedback($request);
+    }
+
+    // get customer detail
+    
+    public function customerdetail()
+    {
+        return $this->apiAuthService->customerdetail();
+    }
+
+    // add customer detail
+
+    public function addcustomerdetail(CustomerDetailRequest $request)
+    {
+        return $this->apiAuthService->addcustomerdetail($request);
+    }
+
+    // get shop employee
+
+    public function getshopemployee()
+    {
+        return $this->apiAuthService->getshopemployee();
+    }
+
+    // add shop employee
+
+    public function addshopemployee(ShopEmployeeRequest $request)
+    {
+        return $this->apiAuthService->addshopemployee($request);
+    }
+
+    // get care 
+
+    public function getcare()
+    {
+        return $this->apiAuthService->getcare();
+    }
+
+    // add care 
+
+    public function addcare(CareRequest $request)
+    {
+        return $this->apiAuthService->addcare($request);
+    }
+
+
+    // delete vehical 
     public function deleteemployee($id)
     {
         return $this->apiAuthService->deleteemployee($id);
@@ -123,7 +205,6 @@ class CAuthController extends Controller
     {
         return $this->apiAuthService->updateemployee($request,$id);
     }
-
 
     // get hostel profile 
 

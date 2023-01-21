@@ -751,21 +751,133 @@ return [
         'address_title'=>'User Address',
         'useraddress' => 'useraddress',
 
-        // sallon services
+        
+        // customer detail 
 
-        'pettype'=>'Pet Type',
-        'sallon_servc_name'=>'Sallon Service name',
-        'sallon_servc_img'=>'Sallon Service Image',
-        'sallon_servc_pckgtyp'=>'Sallon Service Package',
-        'cntr_fee'=>'Sallon Center fees',
-        'home_fee'=>'Sallon Home fees',
+        'shop_employee'=>'shop employee',
+        'booking_date_time'=>'booking date and time',
+        'location'=>'location',
+        'service_status'=>'service status',
+        'servicetype'=>'service type',
+        'tyre_type'=>'tyre type',
+        'vehical_type'=>'vehical type',
 
-        'pettype_title'=>'Pet Type',
-        'sallon_servc_name_title'=>'Sallon Service name',
-        'sallon_servc_img_title'=>'Sallon Service Image',
-        'sallon_servc_pckgtyp_title'=>'Sallon Service Package',
-        'cntr_fees_title'=>'Sallon Center fees',
-        'home_fees_title'=>'Sallon Home fees',
+        'shop_employee_title'=>'shop employee',
+        'booking_date_time_title'=>'booking date and time',
+        'location_title'=>'location',
+        'service_status_title'=>'service status',
+        'servicetype_title'=>'service type',
+        'tyre_type_title'=>'tyre type',
+        'vehical_type_title'=>'vehical type',
 
-        'sallonservice' => 'sallonservice'
-];
+        'customerdetail' => 'customerdetail',
+
+        // shop employee
+
+        'booking_date_time'=>'booking date time',
+        'location'=>'location',
+        'servicetype'=>'service type',
+        'service_status'=>'service status',
+        'tyre_type'=>'tyre type',
+        'vehical_type'=>'vehical type',
+        'qtymin'=>'qtymin',
+        'vehical_registration_no'=>'vehical registration no',
+        'vehical_profile'=>'vehical profile',
+        'location_service'=>'location service',
+        'description'=>'description',
+
+        'booking_date_time_title'=>'booking date time',
+        'location_title'=>'location',
+        'servicetype_title'=>'service type',
+        'service_status_title'=>'service status',
+        'tyre_type_title'=>'tyre type',
+        'vehical_type_title '=>'vehical type',
+        'qtymin_title'=>'qtymin',
+        'vehical_registration_no_title'=>'vehical registration no',
+        'vehical_profile_title'=>'vehical profile',
+        'location_service_title'=>'location service',
+        'description_title'=>'description',
+
+        'shopemployee' => 'shop employee',
+
+        // care
+
+        'servicetype'=>'service type',
+        'tyre_type'=>'tyre type',
+        'vehical_type'=>'vehical type',
+        
+        'servicetype_title'=>'service type',
+        'tyre_type_title'=>'tyre type',
+        'vehical_type_title'=>'vehical type',
+        
+        'care' => 'care',
+
+        // feedback 
+
+        'booking_date_time'=>'booking date and time',
+        'service_type'=>'service type',
+        'service_status'=>'service status',
+        'vehical_type'=>'vehical type',
+        'tyre_type'=>'tyre type',
+        'description'=>'description',
+        'cust_detail'=>'customer detail',
+        'shop_detail'=>'shop detail',
+        'calling_status'=>'calling status',
+        'next_call_date_time'=>'next call date time',
+
+        'description_title'=>'description',
+        'booking_date_time_title'=>'booking date and time',
+        'service_type_title'=>'service type',
+        'service_status_title'=>'service status',
+        'vehical_type_title'=>'vehical type',
+        'tyre_type_title'=>'tyre type',
+        'cust_detail_title'=>'customer detail',
+        'shop_detail_title'=>'shop detail',
+        'calling_status_title'=>'calling status',
+        'next_call_date_time_title'=>'next call date time',
+        
+        'feedback' => 'feedback',
+
+        // towing
+
+        'vehical_type'=>'vehical type',
+        'vehical_photo'=>'vehical photo',
+        'vehical_registration_no'=>'vehical registration no',
+        'service_location'=>'service location',
+        'service_longitude'=>'service longitute',
+        'service_latitude'=>'service latitude',
+        'description'=>'description',
+        'picanddroaddress'=>'pick up and drop address',
+
+        'vehical_type_title'=>'vehical type',
+        'vehical_photo_title'=>'vehical photo',
+        'vehical_registration_no_title'=>'vehical registration no',
+        'service_location_title'=>'service location',
+        'service_longitude_title'=>'service longitute',
+        'service_latitude_title'=>'service latitude',
+        'description_title'=>'description',
+        'picanddroaddress_title'=>'pick up and drop address',
+        
+        'towing' => 'towing',
+
+        // keyunlock
+
+        'vehical_type'=>'vehical type',
+        'vehical_photo'=>'vehical photo',
+        'vehical_registration_no'=>'vehical registration no',
+        'service_location'=>'service location',
+        'service_longitude'=>'service longitute',
+        'service_latitude'=>'service latitude',
+        'description'=>'description',
+       
+        'vehical_type_title'=>'vehical type',
+        'vehical_photo_title'=>'vehical photo',
+        'vehical_registration_no_title'=>'vehical registration no',
+        'service_location_title'=>'service location',
+        'service_longitude_title'=>'service longitute',
+        'service_latitude_title'=>'service latitude',
+        'description_title'=>'description',
+      
+        'keyunlock' => 'keyunlock'
+
+];  

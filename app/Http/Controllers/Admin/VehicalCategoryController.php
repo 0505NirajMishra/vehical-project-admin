@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\VehicalEmployeeRequest;
-use App\Models\VehicalEmployee;
+use App\Http\Requests\Admin\VehicalCategoryRequest;
+use App\Models\VehicalCategory;
 use App\Services\CustomerService;
 use App\Services\ManagerLanguageService;
 use App\Services\UtilityService;
@@ -40,6 +40,7 @@ class VehicalCategoryController extends Controller
         //service files
 
         $this->vehicategory = new vehicalcategoryservice();
+        
         $this->customerService = new CustomerService();
         $this->utilityService = new UtilityService();
         $this->mls = new ManagerLanguageService('messages');
@@ -66,14 +67,16 @@ class VehicalCategoryController extends Controller
     public function store(VehicalCategoryRequest $request)
     {
         $input = $request->except(['_token', 'proengsoft_jsvalidation']);
+
         $image = $request->file('vehical_logo');
         $filename = time() . $image->getClientOriginalName();
         $destinationPath = public_path('/vehicalcategory/image/');
         $image->move($destinationPath, $filename);
         $input['vehical_logo'] = $filename;
+
         $battle = $this->vehicategory->create($input);
         return redirect()->route($this->index_route_name)->with('success',
-            $this->mls->messageLanguage('created', 'vehical category', 1));
+        $this->mls->messageLanguage('created', 'vehical category', 1));
     }
 
     public function show(VehicalCategory $vehicaltype)

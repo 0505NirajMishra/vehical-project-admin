@@ -9,20 +9,18 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-     /**
-     * Run the database seeds.
-     *
-     * @return void
-     */ 
+    
     public function run()
     {
         $data =  [
-            'fullname' => 'Niraj',
+            'customer_name' => 'Niraj',
+            'company_name' => 'tcs',
+            'vehical_name' => 'all',
+            'service_type' => 'all',
             'email' => 'admin@gmail.com',
-            'phone' => '9876548965',
-            'about' => 'Demo',
-            'c_password' => Hash::make('12345678'),
+            'customer_mobile' => '9876548965',
             'password' => Hash::make('12345678'),
+            'customer_cpassword' => Hash::make('12345678'),
             'user_type'=>'Admin',
         ];
         User::create($data);

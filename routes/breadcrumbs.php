@@ -103,17 +103,41 @@ Breadcrumbs::resource('vehicalemployees', $mls->messageLanguage('only_name', 've
 /*------------- Admin Vehical catgory type ------------------------*/
 Breadcrumbs::resource('vehicaltypes', $mls->messageLanguage('only_name', 'vehicaltype', 2));
 
+/*------------- Admin Key unlock type ------------------------*/
+Breadcrumbs::resource('keyunlocks', $mls->messageLanguage('only_name', 'keyunlock', 2));
+
+/*------------- Admin towing ------------------------*/
+Breadcrumbs::resource('towings', $mls->messageLanguage('only_name', 'towing', 2));
+
+/*------------- Admin customer deatils ------------------------*/
+Breadcrumbs::resource('customerdetails', $mls->messageLanguage('only_name', 'customerdetail', 2));
+
+/*------------- Admin employee details ------------------------*/
+Breadcrumbs::resource('shopemployees', $mls->messageLanguage('only_name', 'shopemployee', 2));
+
+/*------------- Admin care ------------------------*/
+Breadcrumbs::resource('cares', $mls->messageLanguage('only_name', 'care', 2));
+
+/*------------- Admin feedback ------------------------*/
+Breadcrumbs::resource('feedbacks', $mls->messageLanguage('only_name', 'feedback', 2));
+
 /*------------- Admin SubCategory ------------------------*/
 Breadcrumbs::resource('subcategorys', $mls->messageLanguage('only_name', 'petsubcategory', 2));
+
 /*------------- Admin Managehostelservice ------------------------*/
 Breadcrumbs::resource('managehostels', $mls->messageLanguage('only_name', 'managehostel', 2)); 
+
 /*------------- Admin Appointment ------------------------*/
 Breadcrumbs::resource('bookanappointments', $mls->messageLanguage('only_name', 'bookanappointment', 2));
+
 /*------------- Admin Notification ------------------------*/
 Breadcrumbs::resource('notifications', $mls->messageLanguage('only_name', 'notification', 2));
+
 /*------------- Admin Package ------------------------*/
 Breadcrumbs::resource('packages', $mls->messageLanguage('only_name', 'package', 2));
+
 /*------------- Admin Contact Us ------------------------*/
 Breadcrumbs::resource('contactus', $mls->messageLanguage('only_name', 'contactus', 2));
+
 /*------------- Admin Promocode ------------------------*/
 Breadcrumbs::resource('promocodes', $mls->messageLanguage('only_name', 'promocode', 2)); 

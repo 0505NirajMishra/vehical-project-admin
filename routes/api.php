@@ -5,16 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PetController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::get('/v1/test', 'Api\V1\TestController@test');
 
@@ -29,8 +19,10 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
     Route::get('/test', [CTestController::class, 'test']);
     
     // -------- Register And Login API ----------
+
     Route::controller(CAuthController::class)->group(function () 
     {
+        
         Route::post('login', 'login');
         Route::post('register', 'register');
         
@@ -48,11 +40,41 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
         Route::post('deleteemployee/{id}','deleteemployee');
         Route::post('updateemployee/{id}','updateemployee');
 
+        // get keyunlock
 
+        Route::post('getkeyunlock','getkeyunlock');
+        Route::post('addkeyunlock','addkeyunlock');
+        
+        // towing
+
+        Route::post('gettowing','gettowing');
+        Route::post('addtowing','addtowing');
+        
+        // feedback 
+        
+        Route::post('getfeedback','getfeedback');
+        Route::post('addfeedback','addfeedback');
+
+        // customer side request
+
+        Route::post('customerdetail','customerdetail');
+        Route::post('addcustomerdetail','addcustomerdetail');
+
+        // shop employee
+
+        Route::post('getshopemployee','getshopemployee');
+        Route::post('addshopemployee','addshopemployee');
+
+        // care
+
+        Route::post('getcare','getcare');
+        Route::post('addcare','addcare');
+        
     });
 
 
     // -------- Register And Login API ----------
+
     Route::group(['middleware' => ['jwt.auth']], function () {
         /* logout APi */
         Route::controller(CAuthController::class)->group(function () {
@@ -75,4 +97,6 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
             Route::post('update-profile-image', 'updateProfileImage');
         });
     });
+
+    
 });

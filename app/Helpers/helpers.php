@@ -116,7 +116,7 @@ function checkUserRole(User $user, $role_name)
 function getSpecificUsersByRole($role_name)
 {
     return User::whereHas('roles', function ($q) use ($role_name) {
-        $q->where("name", $role_name);
+        $q->where("customer_name", $role_name);
     });
 }
 

@@ -9,17 +9,17 @@ use App\Models\MasterOtp;
 use App\Models\User;
 
 use App\Models\TrainerAppslot;
-
 use App\Models\TrainerCapacity;
-
 use App\Models\VehicalCategory;
-
 use App\Models\Package;
-
 use App\Models\Category;
-
 use App\Models\VehicalEmployee;
-
+use App\Models\Feedback;
+use App\Models\CustomerDetail;
+use App\Models\shopemployee;
+use App\Models\Keyunlock;
+use App\Models\Towing;
+use App\Models\Care;
 use App\Models\Rating;
 
 use Illuminate\Support\Facades\Auth;
@@ -53,15 +53,17 @@ use Illuminate\Support\Facades\DB;
 
 class AuthService
 {
-    /**
+     /**
      * Authenticate user Check and login.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public static function login(Request $request)
     {
         $user = User::where('email', $request->email)->first();
+    
         if (!$user) {
             return response()->json(
                 [
@@ -73,7 +75,7 @@ class AuthService
             );
         }
 
-        $credentials = $request->only(['email', 'password']);
+        $credentials = $request->only(['email','password']);
         $credentials['status'] = 0;
         $token = auth('api')->attempt($credentials, ['exp' => Carbon::now()->addDays(60)->timestamp]);
 
@@ -98,10 +100,11 @@ class AuthService
                 );
             }
         }
+    
         $user = JWTAuth::setToken($token)->toUser();
 
-        if ($user->status == 0) {
-            // UserService::updateLastLogin($user->id, $request);
+        if ($user->status == 0) 
+        {
             return response()->json(
                 [
                     'status' => true,
@@ -112,6 +115,7 @@ class AuthService
                 200
             );
         } else {
+
             return response()->json(
                 [
                     'status' => false,
@@ -123,18 +127,12 @@ class AuthService
         }
     }
 
-     /**
-     * Register user.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     public static function register(Request $request)
     {
+        $is_register = false;      
+        $user = User::where('email',$request->email)->first();
         
-        $is_register = false;
-        $user = User::where('email', $request->email)->first();
         if ($user) {
             return response()->json(
                 [
@@ -149,21 +147,22 @@ class AuthService
             $input = array_merge(
                 $request->except(['_token']),
                 [
-                    'fullname' => $request->fullname,
+                    'customer_name' => $request->customer_name,
                     'email' => $request->email,
-                    'phone' => $request->phone,
+                    'customer_mobile' => $request->customer_mobile,
+                    'company_name' => $request->company_name,
+                    'vehical_name' => $request->vehical_name,
+                    'service_type' => $request->service_type,
                     'password' => Hash::make($request->password),
-                    'c_password' => Hash::make($request->c_password),
-                    'about' => $request->about,
+                    'customer_cpassword' => Hash::make($request->customer_cpassword),
                     'user_type' => $request->user_type,
                     'fcm_token' => $request->fcm_token,
                     'status' => 0,
                 ]
             );
 
-          
             $user = UserService::create($input); 
-            
+
             $user->assignRole($request->role);
 
             $token = auth('api')->login($user, ['exp' => Carbon::now()->addDays(120)->timestamp]);
@@ -340,7 +339,159 @@ class AuthService
         }
     }
 
+    // get keyunlock 
+
+    public static function getkeyunlock(){
+           
+        $status = DB::table('keyunlocks')->get();
     
+        if (count($status)>0) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Find successfully',
+                    'data' => $status
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Found',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // add keyunlock
+
+    public static function addkeyunlock(Request $request){
+
+        $input = 
+        [
+            'vehical_type' => $request->vehical_type,
+            'vehical_registration_no' => $request->vehical_registration_no,
+            'service_location' => $request->service_location,
+            'service_longitude' => $request->service_longitude,
+            'service_latitude' => $request->service_latitude,
+            'description' => $request->description,
+            'vehical_photo' => $request->vehical_photo,
+        ];
+
+
+        if(!empty($request->vehical_photo))
+        {
+            $image=$request->file('vehical_photo'); 
+            $filename = time().$image->getClientOriginalName();
+            $destinationPath = public_path('/vehical/image/');
+            $image->move($destinationPath, $filename); 
+            $input['vehical_photo']=$filename;
+        }
+
+        $doctor = Keyunlock::create($input);
+
+        if ($doctor) {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
+                ],
+                200
+                    );
+                 } else {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+                );
+                }
+    }  
+
+    // get towing 
+
+    public static function gettowing(){
+           
+        $status = DB::table('towings')->get();
+    
+        if(count($status)>0) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Find successfully',
+                    'data' => $status
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Found',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // add towing
+
+    public static function addtowing(Request $request){
+
+        $input = 
+        [
+            'vehical_type' => $request->vehical_type,
+            'vehical_registration_no' => $request->vehical_registration_no,
+            'service_location' => $request->service_location,
+            'service_longitude' => $request->service_longitude,
+            'service_latitude' => $request->service_latitude,
+            'description' => $request->description,
+            'vehical_photo' => $request->vehical_photo,
+            'picanddroaddress' => $request->picanddroaddress,
+        ];
+
+
+        if(!empty($request->vehical_photo))
+        {
+            $image=$request->file('vehical_photo'); 
+            $filename = time().$image->getClientOriginalName();
+            $destinationPath = public_path('/vehical/image/');
+            $image->move($destinationPath, $filename); 
+            $input['vehical_photo']=$filename;
+        }
+
+        $doctor = Towing::create($input);
+
+        if ($doctor) {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
+                ],
+                200
+                    );
+                 } else {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+                );
+                }
+    }
+
     // add doctor image 
 
     public static function adddoctorimage(Request $request){
@@ -611,127 +762,7 @@ class AuthService
         }
      } 
     
-     // add trainer profile 
-
-    public static function addtrainerprofile(Request $request){
-
-        $input = 
-        [
-            'trainer_image' => $request->trainer_image,
-        ]; 
-
-        $image=$request->file('trainer_image');
-        
-        $filename = time().$image->getClientOriginalName();
-        
-        $destinationPath = public_path('/trainer/image/');
-        
-        $image->move($destinationPath, $filename);
-        
-        $input['trainer_image']=$filename;
-
-        $doctor = TrainerImage::create($input);
-
-        if ($doctor) {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Insert successfully',
-                    'data' => $doctor
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Inserted',
-                    'data' =>[],
-                ],
-                200
-                );
-        }
-
-    } 
-
-     // update trainer profile 
-
-     public static function updatetrainerprofile(Request $request,$id){
-            
-        $input = 
-        [
-            'trainer_image' => $request->trainer_image,
-        ]; 
-
-        $image=$request->file('trainer_image');
-        
-        $filename = time().$image->getClientOriginalName();
-        
-        $destinationPath = public_path('/trainer/image/');
-        
-        $image->move($destinationPath, $filename);
-        
-        $input['trainer_image']=$filename;
-
-        $updatedata = DB::table('trainerimages')->where('trainer_img_id',$id)->update($input);
-        
-        if ($updatedata) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Update successfully',
-                    'data' => $updatedata
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Updated',
-                    'data' =>[],
-                ],
-                200
-                );
-        }
-     }
-
-    // add trainer appt slot
-
-    public static function addtrainerapptslot(Request $request){
-           
-        $input = 
-        [
-            'trainer_mrg_slot' => $request->trainer_mrg_slot,
-            'trainer_evg_slot' => $request->trainer_evg_slot,
-        ]; 
-      
-        $doctor = TrainerAppslot::create($input);
-
-        if ($doctor) {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Insert successfully',
-                    'data' => $doctor
-                ],
-                200
-            );
-            } 
-            else {
-                return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Inserted',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    } 
-
-
+    
     // add vehical type
 
     public static function addvehicalcategory(Request $request){
@@ -876,32 +907,48 @@ class AuthService
                 200
                 );
         }
-    }
+    } 
 
+    // get feedback
 
-    // add vehical employee
+    public static function getfeedback(){
+           
+        $status = DB::table('feedbacks')->get();
+    
+        if(count($status)>0) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Find successfully',
+                    'data' => $status
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Found',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    } 
 
-    public static function addemployee(Request $request){
+    // add feedback
+
+    public static function addfeedback(Request $request){
            
         $input = 
         [
-            'vehical_service_type_exprt' => $request->vehical_service_type_exprt,
-            'vehical_employee_name' => $request->vehical_employee_name,
-            'vehical_company_name' => $request->vehical_company_name,
-            'vehical_mobile' => $request->vehical_mobile,
+            'description'=>$request->description,
+            'name'=>$request->name,
+            'date'=>$request->date,
         ]; 
         
-        $image=$request->file('vehical_employee_profile');
-        
-        $filename = time().$image->getClientOriginalName();
-        
-        $destinationPath = public_path('/vehicalcategory/image/');
-        
-        $image->move($destinationPath, $filename);
-        
-        $input['vehical_employee_profile']=$filename;
-
-        $doctor = VehicalEmployee::create($input);
+        $doctor = Feedback::create($input);
 
         if($doctor) 
         {
@@ -913,8 +960,208 @@ class AuthService
                 ],
                 200
             );
-            } 
-            else {
+        } 
+        else 
+        {
+                return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+    
+    // get customer detail
+
+    public static function customerdetail(){
+           
+        $status = DB::table('customerdetails')->get();
+    
+        if(count($status)>0) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Find successfully',
+                    'data' => $status
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Found',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // add customerdetail 
+
+    public static function addcustomerdetail(Request $request){
+           
+        $input = 
+        [
+            'shop_address'=>$request->shop_address,
+            'customer_name'=>$request->customer_name,
+            'booking_date_time'=>$request->booking_date_time,
+            'location'=>$request->location,
+            'servicetype'=>$request->servicetype,
+            'tyre_type'=>$request->tyre_type,
+            'vehical_type'=>$request->vehical_type
+        ]; 
+        
+        $doctor = CustomerDetail::create($input);
+
+        if($doctor) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
+                ],
+                200
+            );
+        } 
+        else 
+        {
+                return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // get shop employee
+
+    public static function getshopemployee(){
+           
+        $status = DB::table('shopemployees')->get();
+    
+        if(count($status)>0) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Find successfully',
+                    'data' => $status
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Found',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // add shop employee
+
+    public static function addshopemployee(Request $request){
+           
+        $input = 
+        [
+            'booking_date_time' => $request->booking_date_time,
+            'location' => $request->location,
+            'servicetype' => $request->servicetype,
+            'tyre_type' => $request->tyre_type,
+            'vehical_type' => $request->vehical_type,
+        ]; 
+              
+        $doctor = shopemployee::create($input);
+
+        if($doctor) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
+                ],
+                200
+            );
+        } 
+        else {
+                return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // get care
+
+    public static function getcare(){
+           
+        $status = DB::table('cares')->get();
+    
+        if(count($status)>0) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Find successfully',
+                    'data' => $status
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Found',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // add care 
+
+    public static function addcare(Request $request)
+    {       
+        $input = 
+        [
+            'servicetype' => $request->servicetype,
+            'tyre_type' => $request->tyre_type,
+            'vehical_type' => $request->vehical_type,
+        ]; 
+              
+        $doctor = care::create($input);
+
+        if($doctor) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
+                ],
+                200
+            );
+        } 
+        else {
                 return response()->json(
                 [
                     'status' => false,
@@ -1029,7 +1276,6 @@ class AuthService
         }
     }
 
-    
     // delete trainer appt slot
 
     public static function deletetrainerapptslot($id){ 

@@ -67,13 +67,13 @@ class UserController extends Controller
             }
             if (isset($request->role)) {
                 $items = $items->whereHas("roles", function ($q) use ($request) {
-                    $q->where("name", $request->role);
+                    $q->where("customer_name", $request->role);
                 });
             }
             return datatables()->eloquent($items)->toJson();
             
         } else {
-            $roles = Role::whereNotIn('name', ['Admin', 'Admin'])->pluck('name', 'name');
+            $roles = Role::whereNotIn('customer_name', ['Admin', 'Admin'])->pluck('name', 'name');
             return view('admin.user.index', compact('roles'));
         }
     }
@@ -182,7 +182,7 @@ class UserController extends Controller
             ->with('success', $this->mls->messageLanguage('updated', 'user', 1));
     }
 
-    /**
+     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

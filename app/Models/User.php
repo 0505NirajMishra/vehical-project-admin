@@ -13,54 +13,32 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements JWTSubject
-// class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
-
-     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     
     protected $fillable = [
-        'fullname',
+        'customer_name',
         'email',
-        'phone',
+        'customer_mobile',
+        'company_name',
+        'vehical_name',
+        'service_type',
         'password',
-        'c_password',
-        'about',
+        'customer_cpassword',
         'fcm_token',
         'status',
         'user_type',      
     ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+   
     protected $hidden = [
         'password',
-        'c_password',
+        'customer_cpassword',
         'remember_token',
     ];
 
-
-
     public function ratings(){
-
-        return $this->hasMany('App\Models\Rating');
+           return $this->hasMany('App\Models\Rating');
     }
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
 
     public static function getImageAttribute($value)
     {
@@ -70,26 +48,15 @@ class User extends Authenticatable implements JWTSubject
             return url('/') . '/blank_user.png';
         }
     }
-
-    // Rest omitted for brevity
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
+   
     public function getJWTIdentifier()
     {
-        return $this->getKey();
+           return $this->getKey();
     }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
+ 
     public function getJWTCustomClaims()
     {
-        return [];
+           return [];
     }
+
 }
