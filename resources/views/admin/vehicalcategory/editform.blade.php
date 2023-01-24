@@ -17,12 +17,16 @@
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_type_name_title', 1) }}</label>
         
         <div class="col-lg-4 fv-row">
-            <select class="form-control form-control-solid" name="vehical_type_name">
-              <option value=""> Please select category type</option>
-              <option value="bike" {{ $vehicaltype->vehical_type_name == 'bike' ?  'selected':'' }} >Bike</option>
-              <option value="car" {{ $vehicaltype->vehical_type_name == 'car' ?  'selected':'' }} >Car</option>
-              <option value="pickup" {{ $vehicaltype->vehical_type_name == 'pickup' ?  'selected':'' }} >Pickup</option>
-              <option value="van" {{ $vehicaltype->vehical_type_name == 'van' ?  'selected':'' }} >Van</option>
+                {!! Form::text('vehical_type_name', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.vehical_type_name', 1)]) !!}
+        </div>
+
+        <div class="col-lg-4 fv-row">
+            <select class="form-control form-control-solid" name="vehical_category_type">
+              <option value=""> Please Vehical Category Type</option>
+              <option value="bike" {{ vehicaltype->vehical_category_type=='bike' ? 'selected':''}} >bike</option>
+              <option value="car" {{ vehicaltype->vehical_category_type=='car' ? 'selected':''}} }} >car</option>
+              <option value="pickup" {{ vehicaltype->vehical_category_type=='pickup' ? 'selected':''}} }} >pickup</option>
+              <option value="van" {{ vehicaltype->vehical_category_type=='van' ? 'selected':''}} }} >van</option>
             </select>
         </div>
 

@@ -21,6 +21,8 @@ use App\Models\Keyunlock;
 use App\Models\Towing;
 use App\Models\Care;
 use App\Models\Rating;
+use App\Models\VehicalDetail;
+use App\Models\Addservice;
 
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Hash;
@@ -205,140 +207,6 @@ class AuthService
     }
 
 
-    // Api Hostel Service 
-
-    public static function hostelservice(Request $request){
-
-        $input = 
-        [
-        'service_type' => $request->service_type,
-        'service_company_name' => $request->service_company_name,
-        'service_company_number' => $request->service_company_number,
-        'service_location' => $request->service_location,
-        'service_aboutus' => $request->service_aboutus,
-       
-        ];
-
-
-        if(!empty($request->service_licence_photo)){
-        $image=$request->file('service_licence_photo'); 
-        $filename = time().$image->getClientOriginalName();
-        $destinationPath = public_path('/hostel/image/');
-        $image->move($destinationPath, $filename); 
-        $input['service_licence_photo']=$filename;
-        }
-
-
-        if(!empty($request->service_work_photo)){
-        $image2=$request->file('service_work_photo'); 
-        $filename2 = time().$image2->getClientOriginalName();
-        $destinationPath2 = public_path('/hostel/image/');
-        $image2->move($destinationPath2, $filename2);
-        $input['service_work_photo']=$filename2;
-        }
-
-        if(!empty($request->service_image_logo)){
-        $image3=$request->file('service_image_logo');    
-        $filename3 = time().$image3->getClientOriginalName();
-        $destinationPath3 = public_path('/hostel/image/');
-        $image3->move($destinationPath3, $filename3);
-        $input['service_image_logo']=$filename3;
-        }
-
-
-        $hostelservice = Hostelservice::create($input);
-
-        if ($hostelservice) {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Insert successfully',
-                    'data' => $hostelservice
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Inserted',
-                    'data' =>[],
-                ],
-                200
-                );
-                }
-    }  
-
-    
-    // add doctor 
-
-    public static function adddoctor(Request $request){
-
-        $input = 
-        [
-        'doctor_image' => $request->doctor_image,
-        ];
-
-
-        if(!empty($request->doctor_image)){
-        $image=$request->file('doctor_image'); 
-        $filename = time().$image->getClientOriginalName();
-        $destinationPath = public_path('/doctor/image/');
-        $image->move($destinationPath, $filename); 
-        $input['doctor_image']=$filename;
-        }
-
-        $doctor = Doctors::create($input);
-
-        if ($doctor) {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Insert successfully',
-                    'data' => $doctor
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Inserted',
-                    'data' =>[],
-                ],
-                200
-                );
-                }
-    }  
-
-    // get hostel availbilty 
-
-    public static function gethostelavailbilty(){
-           
-        $status = DB::table('hostelavailbiltys')->get();
-    
-        if (count($status)>0) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $status
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    }
-
     // get keyunlock 
 
     public static function getkeyunlock(){
@@ -492,49 +360,6 @@ class AuthService
                 }
     }
 
-    // add doctor image 
-
-    public static function adddoctorimage(Request $request){
-
-        $input = 
-        [
-           'clinic_img' => $request->clinic_img,
-        ];
-
-        $image=$request->file('clinic_img');
-        
-        $filename = time().$image->getClientOriginalName();
-        
-        $destinationPath = public_path('/doctor/image/');
-        
-        $image->move($destinationPath, $filename);
-        
-        $input['clinic_img']=$filename;
-
-        $doctor = Docimages::create($input);
-
-        if ($doctor) {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Insert successfully',
-                    'data' => $doctor
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Inserted',
-                    'data' =>[],
-                ],
-                200
-                );
-        }
-    }
-
-   
      // update doctor image record
 
      public static function updatedoctorimage(Request $request,$id){ 
@@ -577,192 +402,7 @@ class AuthService
                 );
                 }
      } 
-
-
-    // delete doctor capacitor 
-
-    public static function deletedoctorcapacitor($id){
-
-        $result=DB::table('doctorcapacitys')->where('dr_apt_cap_id',$id)->delete();
-       
-        if($result) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Delete successfully',
-                    'data' => $result
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-
-    }
-
-    // update doctor capacitor 
-
-    public static function updatedoctorcapacitor(Request $request,$id){
-           
-        $input = 
-        [
-            'dr_apt_cap' => $request->dr_apt_cap,
-        ]; 
-
-    
-        $updatedata = DB::table('doctorcapacitys')->where('dr_apt_cap_id',$id)->update($input);
-        
-        if ($updatedata) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Update successfully',
-                    'data' => $updatedata
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Updated',
-                    'data' =>[],
-                ],
-                200
-                );
-                }
-    } 
-
-    // get doctor availbilty 
-
-    public static function getdocavailbilty(){
-
-        $status = DB::table('doctoravailbiltys')->get();
-    
-        if (count($status)>0) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $status
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    } 
-
-     // delete doctor availabilty 
-
-     public static function deletedocavailbilty($id){
-            
-        $result=DB::table('doctoravailbiltys')->where('doctor_avail_id',$id)->delete();
-       
-        if($result) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Delete successfully',
-                    'data' => $result
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-
-     }
-
-    // update doctor availabilty 
-
-    public static function updatedocavailbilty(Request $request,$id){ 
-
-        $input = 
-        [
-        'avail_days' => $request->avail_days,
-        'opening_time' => $request->opening_time,
-        'closing_time' => $request->closing_time,
-        ];
-
-        $updatedata = DB::table('doctoravailbiltys')->where('doctor_avail_id',$id)->update($input);
-        
-        if ($updatedata) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Update successfully',
-                    'data' => $updatedata
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Updated',
-                    'data' =>[],
-                ],
-                200
-                );
-                }
-    }
-
-     // get doctor spe 
-
-     public static function getdoctorspe(){
-           
-        $status = DB::table('doctorspecialitys')->get();
-    
-        if (count($status)>0) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $status
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-     } 
-    
-    
+ 
     // add vehical type
 
     public static function addvehicalcategory(Request $request){
@@ -770,6 +410,7 @@ class AuthService
         $input = 
         [
             'vehical_type_name' => $request->vehical_type_name,
+            'vehical_category_type' => $request->vehical_category_type,
             'vehical_logo' => $request->vehical_logo,
         ]; 
         
@@ -795,6 +436,78 @@ class AuthService
                 ],
                 200
             );
+            } 
+            else {
+                return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // add service 
+
+    public static function addservice(Request $request){
+           
+        $input = 
+        [
+            'service_name' => $request->service_name,
+        ]; 
+        
+        $doctor = Addservice::create($input);
+
+        if($doctor) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
+                ],
+                200
+            );
+            } 
+            else {
+                return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // add vehical detail 
+
+    public static function addvehicaldetail(Request $request){
+
+        $input = 
+        [
+            'vehical_detail' => $request->vehical_detail,
+            'vehical_type' => $request->vehical_type,
+            'vehical_company_name' => $request->vehical_company_name,
+            'vehical_name' => $request->vehical_name,
+            'vehical_registration_no' => $request->vehical_registration_no,
+        ]; 
+        
+        $doctor = VehicalDetail::create($input);
+
+        if($doctor) 
+        {
+                return response()->json(
+                    [
+                        'status' => true,
+                        'message' => 'Data Insert successfully',
+                        'data' => $doctor
+                    ],
+                    200
+                );
             } 
             else {
                 return response()->json(
@@ -943,9 +656,15 @@ class AuthService
            
         $input = 
         [
+            'booking_date_time'=>$request->booking_date_time,
+            'service_type'=>$request->service_type,
+            'service_status'=>$request->service_status,
+            'vehical_type'=>$request->vehical_type,
+            'tyre_type'=>$request->tyre_type,
+            'cust_detail'=>$request->cust_detail,
+            'shop_detail'=>$request->shop_detail,
+            'calling_status'=>$request->calling_status,
             'description'=>$request->description,
-            'name'=>$request->name,
-            'date'=>$request->date,
         ]; 
         
         $doctor = Feedback::create($input);
@@ -1082,6 +801,7 @@ class AuthService
             'servicetype' => $request->servicetype,
             'tyre_type' => $request->tyre_type,
             'vehical_type' => $request->vehical_type,
+            'service_status' => $request->service_status,
         ]; 
               
         $doctor = shopemployee::create($input);
@@ -1276,119 +996,38 @@ class AuthService
         }
     }
 
-    // delete trainer appt slot
 
-    public static function deletetrainerapptslot($id){ 
+    // add vehical employee
 
-        $result=DB::table('trainerappslots')->where('trainer_apt_slot_id',$id)->delete();
-       
-        if($result) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Delete successfully',
-                    'data' => $result
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    
-    }
-
-    // update trainer aapt slot
-
-    public static function updatetrainerapptslot(Request $request,$id){
-            
+    public static function addemployee(Request $request){
+           
         $input = 
         [
-            'trainer_mrg_slot' => $request->trainer_mrg_slot,
-            'trainer_evg_slot' => $request->trainer_evg_slot,
+            'vehical_service_type_exprt' => $request->vehical_service_type_exprt,
+            'vehical_employee_name' => $request->vehical_employee_name,
+            'vehical_employee_profile' => $request->vehical_employee_profile,
+            'vehical_company_name' => $request->vehical_company_name,
+            'vehical_mobile' => $request->vehical_mobile,
         ]; 
+              
+        $doctor = VehicalEmployee::create($input);
 
-        $updatedata = DB::table('trainerappslots')->where('trainer_apt_slot_id',$id)->update($input);
-        
-        if ($updatedata) 
+        if($doctor) 
         {
             return response()->json(
                 [
                     'status' => true,
-                    'message' => 'Data Update successfully',
-                    'data' => $updatedata
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Updated',
-                    'data' =>[],
-                ],
-                200
-                );
-        }
-    }
-  
-    // get clinic service record 
-
-    public static function getclinicrecord(){
-           
-        $status = DB::table('doctclinicservices')->get();
-    
-        if (count($status)>0) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $status
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
                 ],
                 200
             );
-        } else {
-            return response()->json(
+        } 
+        else {
+                return response()->json(
                 [
                     'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    }
- 
-    // get doctor api 
-    
-    public static function getdoctorprofile()
-    {
-
-        $data = DB::table('doctors')->get();
-    
-        if (count($data)>0) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $data
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
+                    'message' => 'Data not Inserted',
                     'data' =>[],
                 ],
                 200
@@ -1396,138 +1035,11 @@ class AuthService
         }
     }
 
-
-    // delete doctor record 
     
-    public static function deletedoctorservice($id){
-
-        $result=DB::table('doctorservices')->where('doctor_service_id', $id)->delete();
-       
-        if($result) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Delete successfully',
-                    'data' => $result
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    }
-
-    // update hostel appoinment api 
-
-    public static function updatehostelappoinment(Request $request,$id){
-           
-        $input = 
-        [
-        'appt_date_time' => $request->appt_date_time,
-        'book_date_time' => $request->book_date_time,
-        'progress_status' => $request->progress_status,
-        'payment' => $request->payment,
-        ];
-
-        $updatedata = DB::table('hostelappoinments')->where('appt_id',$id)->update($input);
-        
-        if ($updatedata) {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Update successfully',
-                    'data' => $updatedata
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Updated',
-                    'data' =>[],
-                ],
-                200
-                );
-                }
-           
-    }
-
-   
-    // get petdetail list 
-
-    public static function get_petdetail()
-    {
-        $status = Petdetails::get();
-    
-        if (count($status)>0) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $status
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    }
-    
-    // update doctor spe 
-
-    public static function updatedoctorslot(Request $request,$id){
-            
-        $input = 
-        [
-        'dr_mrg_slot' => $request->dr_mrg_slot,
-        'dr_evg_slot' => $request->dr_evg_slot,
-        ];
-
-        $updatedata = DB::table('doctoraptslots')->where('dr_apt_slot_td',$id)->update($input);
-        
-        if ($updatedata) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Update successfully',
-                    'data' => $updatedata
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Updated',
-                    'data' =>[],
-                ],
-                200
-                );
-        }
-    }
- 
     //Api For Update User Notification Status 
 
-   public static function update_notification(Request $request)
-   {  
+    public static function update_notification(Request $request)
+    {  
 
     $validator=Validator::make($request->all(),[
         'push_notification'=>'required',
@@ -1609,13 +1121,12 @@ class AuthService
                 'phone'=>$request->phone,
                 'gender'=>$request->gender,
             ]);
-                return response()->json([
+                
+            return response()->json([
                     'message'=>'Profile Update Successfully',
-                ],200);
+            ],200);
         
     }
-
-
 
     //Api For Get catgeory
 
@@ -1641,8 +1152,6 @@ class AuthService
                 );
             }
     } 
-
-
 
 
     // Api For Get Subcatgeory
@@ -1696,8 +1205,9 @@ class AuthService
     }
 
     //Api For Update Password By User ID
-        public static function update_password(Request $request)
-        {
+        
+    public static function update_password(Request $request)
+    {
             $updateUser = DB::table('users')->where('id',$request->user_id)->update(array('password' =>  Hash::make($request->password)));
         
             if ($updateUser) {
@@ -1719,7 +1229,7 @@ class AuthService
                     200
                 );
             }
-        }
+    }
 
 
     //Api For Set Availablity

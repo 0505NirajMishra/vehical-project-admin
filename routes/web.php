@@ -170,7 +170,8 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
 
         // shop employee
 
-        Route::controller(ShopEmployeeController::class)->group(function () {
+        Route::controller(ShopEmployeeController::class)->group(function () 
+        {
             Route::get('/shopemployees/status/{id}/{status}', 'status')->name('shopemployees.status');
             Route::get('/shopemployees/destroy/{id}/', 'destroy')->name('shopemployees.destroy');
         });
@@ -207,6 +208,22 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
             Route::get('/towings/destroy/{id}/','destroy')->name('towings.destroy');
         });
         Route::resource('/towings',towingController::class);
+
+        // add vehical detail 
+
+        Route::controller(VehicaldetailController::class)->group(function () {
+            Route::get('/addvehicaldetails/status/{id}/{status}','status')->name('addvehicaldetails.status');
+            Route::get('/addvehicaldetails/destroy/{id}/','destroy')->name('addvehicaldetails.destroy');
+        });
+        Route::resource('/addvehicaldetails',VehicaldetailController::class);
+
+        // add service 
+
+        Route::controller(AddServiceController::class)->group(function () {
+            Route::get('/addservices/status/{id}/{status}','status')->name('addservices.status');
+            Route::get('/addservices/destroy/{id}/','destroy')->name('addservices.destroy');
+        });
+        Route::resource('/addservices',AddServiceController::class);
 
         //Setting manager
         Route::controller(SettingController::class)->group(function () {

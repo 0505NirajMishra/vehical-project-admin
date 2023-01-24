@@ -1,0 +1,57 @@
+<!--begin::Card body-->
+<div class="card-body">
+    
+    <div class="row mb-6">
+
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_detail_title', 1) }}</label>
+        
+        <div class="col-lg-4 fv-row">
+             {!! Form::text('vehical_detail', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.vehical_detail', 1)]) !!}
+        </div>
+       
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_company_name_title', 1) }}</label>
+        
+        <div class="col-lg-4 fv-row">
+                {!! Form::text('vehical_company_name', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.vehical_company_name', 1)]) !!}
+        </div>
+ 
+    </div>
+
+    <div class="row mb-6">
+        
+        <div class="col-lg-4 fv-row">
+            <select class="form-control form-control-solid" name="vehical_type">
+              <option value=""> Please Vehical Type</option>
+              <option value="bike" {{ $addvehicaldetail->vehical_type=='bike' ? 'selected':''}} >bike</option>
+              <option value="car" {{ $addvehicaldetail->vehical_type=='car' ? 'selected':''}} }} >car</option>
+              <option value="pickup" {{ $addvehicaldetail->vehical_type=='pickup' ? 'selected':''}} }} >pickup</option>
+              <option value="van" {{ $addvehicaldetail->vehical_type=='van' ? 'selected':''}} }} >van</option>
+            </select>
+        </div>
+
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_name_title', 1) }}</label>
+        
+        <div class="col-lg-4 fv-row">
+                {!! Form::text('vehical_name', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.vehical_name', 1)]) !!}
+        </div>
+
+    </div>
+
+    <div class="row mb-6">
+
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_registration_no_title', 1) }}</label>
+        
+        <div class="col-lg-4 fv-row">
+                {!! Form::text('vehical_registration_no', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.vehical_registration_no', 1)]) !!}
+        </div>
+
+    </div>
+    
+</div>
+
+<!--end::Card body-->
+
+@push('scripts')
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\VehicalDetailRequest', 'form') !!}
+@endpush

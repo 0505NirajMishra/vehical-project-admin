@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CustomerDetailRequest;
 use App\Models\CustomerDetail;
+use App\Models\VehicalCategory;
+use App\Models\Addservice;
 use App\Services\customerdetailservice;
 
 use App\Services\CustomerService;
@@ -63,15 +65,16 @@ class CustomerDetailsController extends Controller
 
     public function create()
     {
-        return view($this->create_view);
+        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type_name","vehical_category_type","vehical_catgeory_id"]);
+        $data1['addservices'] = Addservice::get(["service_name","service_id"]);        
+        return view($this->create_view,$data,$data1);
     }
 
     public function store(CustomerDetailRequest $request)
     {
         $input = $request->except(['_token', 'proengsoft_jsvalidation']);
         $battle = $this->customerdetail->create($input);
-        return redirect()->route($this->index_route_name)->with('success',
-        $this->mls->messageLanguage('created', 'add customer detail', 1));
+        return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('created', 'add customer detail', 1));
     }
 
     public function show(CustomerDetail $customerdetail)

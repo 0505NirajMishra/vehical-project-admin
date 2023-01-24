@@ -10,12 +10,14 @@ use App\Http\Requests\ApiRegisterRequest;
 use App\Http\Requests\Admin\HostelSerRequest;
 use App\Http\Requests\Admin\VehicalCategoryRequest;
 use App\Http\Requests\Admin\VehicalEmployeeRequest;
+use App\Http\Requests\Admin\AddServiceRequest;
 use App\Http\Requests\Admin\FeedbackRequest;
 use App\Http\Requests\Admin\CustomerDetailRequest;
 use App\Http\Requests\Admin\KeyunlockRequest;
 use App\Http\Requests\Admin\TowingRequest;
 use App\Http\Requests\Admin\CareRequest;
-
+use App\Http\Requests\Admin\ShopEmployeeRequest;
+use App\Http\Requests\Admin\VehicalDetailRequest;
 use App\Http\Requests\ApiChangePasswordRequest;
 use App\Http\Requests\ApiConsultantRequest;
 use App\Http\Requests\Admin\ContactUsRequest;
@@ -53,7 +55,6 @@ class CAuthController extends Controller
     }
 
 
-
     // post doctor 
 
     public function adddoctor(DoctorRequest $request)
@@ -68,6 +69,13 @@ class CAuthController extends Controller
         return $this->apiAuthService->addhostelappoinment($request);
     }
 
+    // add services
+
+    public function addservice(AddServiceRequest $request)
+    {
+        return $this->apiAuthService->addservice($request);
+    }
+    
 
     // add vehical type 
 
@@ -103,6 +111,14 @@ class CAuthController extends Controller
     {
         return $this->apiAuthService->addemployee($request);
     }
+
+    // vehical add detail
+
+    public function addvehicaldetail(VehicalDetailRequest $request)
+    {
+        return $this->apiAuthService->addvehicaldetail($request);
+    }
+
 
     // get vehical type
 

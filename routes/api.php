@@ -70,6 +70,11 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
         Route::post('getcare','getcare');
         Route::post('addcare','addcare');
         
+        // add vehical detail
+
+        Route::post('addvehicaldetail','addvehicaldetail');
+        Route::post('addservice','addservice');        
+        
     });
 
 

@@ -21,17 +21,14 @@
 
     <div class="row mb-6">
 
-        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.servicetype_title', 1) }}</label>
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.service_name_title', 1) }}</label>
         
         <div class="col-lg-4 fv-row">
             <select class="form-control form-control-solid" name="servicetype">
-              <option value=""> Please select service type</option>
-              <option value="FlatBattery">Flat Battery </option>
-              <option value="FlatTyre">Flat Tyre</option>
-              <option value="Towing">Towing </option>
-              <option value="Petrol/Desiel">Petrol/ Desiel</option>
-              <option value="Keyunlock">Key unlock </option>
-              <option value="StartingProblem">Starting Problem </option>
+                    <option value=""> select service name</option>
+                    @foreach($addservices as $data1)
+                        <option value="{{$data1->service_name}}">{{$data1->service_name}}</option>
+                    @endforeach
             </select>
         </div>
 
@@ -52,14 +49,14 @@
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_type_title', 1) }}</label>
         
         <div class="col-lg-4 fv-row">
+           
             <select class="form-control form-control-solid" name="vehical_type">
-              <option value=""> Please select vehical type</option>
-              <option value="bike">Bike</option>
-              <option value="car">Car</option>
-              <option value="pickup">Pickup</option>
-              <option value="van">Van</option>
-              <option value="truck">truck</option>
+                    <option value=""> select vehical category type</option>
+                    @foreach($vehicalcategorys as $data)
+                        <option value="{{$data->vehical_category_type}}">{{$data->vehical_category_type}}</option>
+                    @endforeach
             </select>
+
         </div>
 
         

@@ -16,6 +16,7 @@ class VehicalCategory extends Model
     protected $fillable = [
        'vehical_type_name',
        'vehical_logo',
+       'vehical_category_type'
     ];
 
 }

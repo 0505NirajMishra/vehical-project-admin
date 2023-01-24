@@ -416,9 +416,29 @@ return [
 
         'vehical_type_name'=>'vehical type name',
         'vehical_logo'=>'vehical logo',
+        'vehical_category_type'=>'vehical category type',
+
         'vehical_type_name_title'=>'vehical type name',
+        'vehical_category_type_title'=>'vehical category type',
+
         'vehical_logo_title'=>'vehical logo',
         'vehicalcategory'=>'vehical category', 
+
+        // vehical detail 
+
+        'vehical_detail'=>'vehical detail',
+        'vehical_type'=>'vehical type',
+        'vehical_company_name'=>'vehical compnay name',
+        'vehical_name'=>'vehical name',
+        'vehical_registration_no' => 'vehical registration no',
+
+        'vehical_detail_title'=>'vehical detail',
+        'vehical_type_title'=>'vehical type',
+        'vehical_company_name_title'=>'vehical compnay name',
+        'vehical_name_title'=>'vehical name',
+        'vehical_registration_no_title' => 'vehical registration no',
+
+        'vehicaldetail'=>'vehical detail', 
 
         // vehical employee 
 
@@ -878,6 +898,12 @@ return [
         'service_latitude_title'=>'service latitude',
         'description_title'=>'description',
       
-        'keyunlock' => 'keyunlock'
+        'keyunlock' => 'keyunlock',
+
+        // add service 
+
+        'service_name'=>'service name',            
+        'service_name_title'=>'service name',
+        'servicename' => 'service name'
 
 ];  

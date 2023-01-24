@@ -46,7 +46,7 @@ class vehicalcategoryservice
 
     public static function datatable()
     {
-        $data = DB::table('vehicalcategorys')->orderBy('created_at', 'desc')->get();
+        $data = DB::table('vehicalcategorys')->orderBy('created_at', 'asc')->get();
         return $data;
     }
 }

@@ -26,12 +26,11 @@
         <div class="col-lg-4 fv-row">
             <select class="form-control form-control-solid" name="servicetype">
               <option value=""> Please select service type</option>
-              <option value="FlatBattery" {{ $customerdetail->servicetype == 'FlatBattery' ? 'selected':'' }} >Flat Battery </option>
-              <option value="FlatTyre" {{ $customerdetail->servicetype == 'FlatTyre' ? 'selected':'' }} >Flat Tyre</option>
+              <option value="Flat Battery" {{ $customerdetail->servicetype == 'Flat Battery' ? 'selected':'' }} >Flat Battery </option>
+              <option value="Flat tyre(Punchure)" {{ $customerdetail->servicetype == 'Flat tyre(Punchure)' ? 'selected':'' }} >Flat Tyre</option>
               <option value="Towing" {{ $customerdetail->servicetype == 'Towing' ? 'selected':'' }} >Towing </option>
               <option value="Petrol/Desiel" {{ $customerdetail->servicetype == 'Petrol/Desiel' ? 'selected':'' }} >Petrol/ Desiel</option>
               <option value="Keyunlock" {{ $customerdetail->servicetype == 'Keyunlock' ? 'selected':'' }} >Key unlock </option>
-              <option value="StartingProblem" {{ $customerdetail->servicetype == 'StartingProblem' ? 'selected':'' }} >Starting Problem </option>
             </select>
         </div>
 

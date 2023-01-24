@@ -118,6 +118,12 @@ Breadcrumbs::resource('shopemployees', $mls->messageLanguage('only_name', 'shope
 /*------------- Admin care ------------------------*/
 Breadcrumbs::resource('cares', $mls->messageLanguage('only_name', 'care', 2));
 
+/*------------- Admin vehical detail------------------------*/
+Breadcrumbs::resource('addvehicaldetails', $mls->messageLanguage('only_name', 'addvehicaldetail', 2));
+
+/*------------- Admin add service ------------------------*/
+Breadcrumbs::resource('addservices', $mls->messageLanguage('only_name', 'addservice', 2));
+
 /*------------- Admin feedback ------------------------*/
 Breadcrumbs::resource('feedbacks', $mls->messageLanguage('only_name', 'feedback', 2));
 
