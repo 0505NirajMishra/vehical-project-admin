@@ -21,17 +21,33 @@
 
     <div class="row mb-6">
 
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.longitute_title', 1) }}</label>
+
+        <div class="col-lg-4 fv-row">
+                {!! Form::text('longitute', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.longitute', 1)]) !!}
+        </div>
+
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.latitute_title', 1) }}</label>
+
+        <div class="col-lg-4 fv-row">
+                {!! Form::text('latitute', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.latitute', 1)]) !!}
+        </div>
+
+    </div>
+
+    <div class="row mb-6">
+
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.servicetype_title', 1) }}</label>
         
         <div class="col-lg-4 fv-row">
-            <select class="form-control form-control-solid" name="servicetype">
-              <option value=""> Please select service type</option>
-              <option value="Flat Battery" {{ $customerdetail->servicetype == 'Flat Battery' ? 'selected':'' }} >Flat Battery </option>
-              <option value="Flat tyre(Punchure)" {{ $customerdetail->servicetype == 'Flat tyre(Punchure)' ? 'selected':'' }} >Flat Tyre</option>
-              <option value="Towing" {{ $customerdetail->servicetype == 'Towing' ? 'selected':'' }} >Towing </option>
-              <option value="Petrol/Desiel" {{ $customerdetail->servicetype == 'Petrol/Desiel' ? 'selected':'' }} >Petrol/ Desiel</option>
-              <option value="Keyunlock" {{ $customerdetail->servicetype == 'Keyunlock' ? 'selected':'' }} >Key unlock </option>
+           
+            <select class="form-control form-control-solid" name="service_name">
+                     <option value=""> Please service type</option>
+                     @foreach($data1 as $s1)
+                         <option value="{{$s1->service_name}}" {{ $s1->service_name == $s1->service_name ? 'selected' : '' }} >{{$s1->service_name}}</option>
+                     @endforeach
             </select>
+
         </div>
 
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_type_title', 1) }}</label>
@@ -51,14 +67,14 @@
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_type_title', 1) }}</label>
         
         <div class="col-lg-4 fv-row">
+           
             <select class="form-control form-control-solid" name="vehical_type">
-              <option value=""> Please select vehical type</option>
-              <option value="bike" {{ $customerdetail->vehical_type == 'bike' ? 'selected':'' }} >Bike</option>
-              <option value="car" {{ $customerdetail->vehical_type == 'car' ? 'selected':'' }} >Car</option>
-              <option value="pickup" {{ $customerdetail->vehical_type == 'pickup' ? 'selected':'' }} >Pickup</option>
-              <option value="van" {{ $customerdetail->vehical_type == 'van' ? 'selected':'' }} >Van</option>
-              <option value="truck" {{ $customerdetail->vehical_type == 'truck' ? 'selected':'' }} >truck</option>
+                     <option value=""> Please vehical type</option>
+                     @foreach($data as $d1)
+                         <option value="{{$d1->vehical_type}}" {{ $d1->vehical_type == $d1->vehical_type ? 'selected' : '' }} >{{$d1->vehical_type}}</option>
+                     @endforeach
             </select>
+
         </div>
 
         

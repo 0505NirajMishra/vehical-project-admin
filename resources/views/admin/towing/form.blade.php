@@ -25,12 +25,10 @@
         
         <div class="col-lg-4 fv-row">
             <select class="form-control form-control-solid" name="vehical_type">
-              <option value=""> Please select vehical type</option>
-              <option value="bike">Bike</option>
-              <option value="car">Car</option>
-              <option value="pickup">Pickup</option>
-              <option value="van">Van</option>
-              <option value="truck">truck</option>
+                    <option value="">select vehical type</option>
+                    @foreach($vehicalcategorys as $data)
+                        <option value="{{$data->vehical_type}}">{{$data->vehical_type}}</option>
+                    @endforeach
             </select>
         </div>
         

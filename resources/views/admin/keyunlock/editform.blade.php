@@ -30,12 +30,10 @@
         
         <div class="col-lg-4 fv-row">
             <select class="form-control form-control-solid" name="vehical_type">
-              <option value=""> Please select vehical type</option>
-              <option value="bike" {{ $keyunlock->vehical_type=='bike' ? 'selected':'' }} >Bike</option>
-              <option value="car" {{  $keyunlock->vehical_type=='car' ? 'selected':'' }} >Car</option>
-              <option value="pickup" {{  $keyunlock->vehical_type=='pickup' ? 'selected':'' }} >Pickup</option>
-              <option value="van" {{  $keyunlock->vehical_type=='van' ? 'selected':'' }} >Van</option>
-              <option value="truck" {{  $keyunlock->vehical_type=='truck' ? 'selected':'' }} >truck</option>
+                     <option value=""> Please vehical type</option>
+                     @foreach($data as $d1)
+                         <option value="{{$d1->vehical_type}}" {{ $d1->vehical_type == $d1->vehical_type ? 'selected' : '' }} >{{$d1->vehical_type}}</option>
+                     @endforeach
             </select>
         </div>
         

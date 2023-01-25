@@ -11,7 +11,9 @@
     <th>ID No.</th>
     <th>booking date and time</th>
     <th>location</th>
-    <th>service type</th>
+    <th>longitute</th>
+    <th>latitute</th>
+    <th>service name</th>
     <th>tyre type</th>
     <th>vehical type</th>
     <th>ACTION</th>
@@ -24,7 +26,9 @@
     <td>{{$user->shopemployee_id}}</td>
     <td>{{$user->booking_date_time}}</td>
     <td>{{$user->location}}</td>
-    <td>{{$user->servicetype}}</td>
+    <td>{{$user->longitute}}</td>
+    <td>{{$user->latitute}}</td>
+    <td>{{$user->service_name}}</td>
     <td>{{$user->tyre_type}}</td>
     <td>{{$user->vehical_type}}</td>
     

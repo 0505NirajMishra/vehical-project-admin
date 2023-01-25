@@ -19,8 +19,10 @@ class CustomerDetail extends Model
        'booking_date_time',
        'location',
        'service_status',
-       'servicetype',
+       'service_name',
        'tyre_type',
+       'longitute',
+       'latitute',
        'vehical_type',
     ];
 }

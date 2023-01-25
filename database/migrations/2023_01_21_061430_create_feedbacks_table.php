@@ -6,17 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->increments('feedback_id');
             $table->string('booking_date_time');
-            $table->string('service_type');
+            $table->string('service_name');
             $table->string('service_status');
             $table->string('vehical_type');
             $table->string('tyre_type');
@@ -29,13 +25,9 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('feedbacks');
     }
+      
 };

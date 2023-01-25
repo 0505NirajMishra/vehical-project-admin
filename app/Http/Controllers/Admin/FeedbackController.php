@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FeedbackRequest;
 use App\Models\Feedback;
+use App\Models\VehicalCategory;
+use App\Models\Addservice;
 use App\Services\FeedbackServices;
 
 use App\Services\CustomerService;
@@ -52,7 +54,8 @@ class FeedbackController extends Controller
     {
         $items = $this->feedbackservice->datatable();
 
-        if ($request->ajax()) {
+        if ($request->ajax()) 
+        {
             return view('admin.feedback.feedback_table', ['feedback' => $items]);
         } else {
             return view('admin.feedback.index', ['feedback' => $items]);
@@ -62,10 +65,12 @@ class FeedbackController extends Controller
 
     public function create()
     {
-        return view($this->create_view);
+        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);
+        $data1['addservices'] = Addservice::get(["service_name","service_id"]);
+        return view($this->create_view,$data,$data1);
     }
 
-    public function store(FeedbackRequest $request)
+    public function store(Request $request)
     {
         $input = $request->except(['_token', 'proengsoft_jsvalidation']);
         $battle = $this->feedbackservice->create($input);
@@ -80,7 +85,10 @@ class FeedbackController extends Controller
 
     public function edit(Feedback $feedback)
     {
-        return view($this->edit_view, compact('feedback'));
+        $data = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);
+        $data1 = Addservice::get(["service_name","service_id"]);
+        
+        return view($this->edit_view,$data,compact('feedback','data','data1'));
     }
 
     public function update(FeedbackRequest $request,Feedback $feedback)

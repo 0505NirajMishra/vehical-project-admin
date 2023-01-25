@@ -921,6 +921,34 @@ class AuthService
         }
     }
 
+    // get service
+
+    public static function getservice(){
+           
+        $status = DB::table('addservices')->get();
+    
+        if (count($status)>0) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Find successfully',
+                    'data' => $status
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Found',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
     // delete vehical employee
 
     public static function deleteemployee($id){ 

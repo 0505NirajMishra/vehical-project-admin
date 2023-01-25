@@ -20,8 +20,8 @@
   <tr>
 
     <td>{{ $user->vehical_catgeory_id }}</td>
-    <td>{{ $user->vehical_type_name }}</td>
-    <td>{{ $user->vehical_category_type }}</td>
+    <td>{{ $user->vehical_name }}</td>
+    <td>{{ $user->vehical_type }}</td>
     
     <td><img src="{{ url('/') }}/vehicalcategory/image/{{$user->vehical_logo}}" style="width:50px; height:50px;" /></td>
   

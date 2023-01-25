@@ -70,8 +70,16 @@ class AddServiceController extends Controller
     public function store(AddServiceRequest $request)
     {
         $input = $request->except(['_token', 'proengsoft_jsvalidation']);
+
+        $image = $request->file('service_logo');
+        $filename = time() . $image->getClientOriginalName();
+        $destinationPath = public_path('/service/image/');
+        $image->move($destinationPath, $filename);
+        $input['service_logo'] = $filename;
+
         $battle = $this->addservice->create($input);
         return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('created', 'add service', 1));
+    
     }
 
     public function show(Addservice $addservice)
@@ -87,8 +95,22 @@ class AddServiceController extends Controller
     public function update(AddServiceRequest $request,Addservice $addservice)
     {
         $input = $request->except(['_method', '_token', 'proengsoft_jsvalidation']);
-        $this->addservice->update($input, $addservice);
-        return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('updated', 'update add service', 1));
+
+        if (!empty($input['service_logo'])) 
+        {
+            $image = $request->file('service_logo');
+            $filename = time() . $image->getClientOriginalName();
+            $destinationPath = public_path('/service/image/');
+            $image->move($destinationPath, $filename);
+            $input['service_logo'] = $filename;
+
+            $this->addservice->update($input, $addservice);
+            return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('updated', 'service update', 1));
+
+        } else {
+            $this->addservice->update($input, $addservice);
+            return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('updated', 'service update', 1));
+        }
 
     }
 

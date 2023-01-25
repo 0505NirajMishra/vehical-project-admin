@@ -16,6 +16,7 @@ class Addservice extends Model
     protected $fillable = 
     [
        'service_name',
+       'service_logo'
     ];
 
 }

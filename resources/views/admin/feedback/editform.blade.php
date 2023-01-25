@@ -19,20 +19,16 @@
 
     </div>
 
-   
     <div class="row mb-6">
 
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.service_type_title', 1) }}</label>
         
         <div class="col-lg-4 fv-row">
-            <select class="form-control form-control-solid" name="service_type">
-              <option value=""> Please select service type</option>
-              <option value="FlatBattery" {{ $feedback->service_type =='FlatBattery' ? 'selected':'' }} >Flat Battery </option>
-              <option value="FlatTyre" {{ $feedback->service_type =='FlatTyre' ? 'selected':'' }} >Flat Tyre</option>
-              <option value="Towing" {{ $feedback->service_type =='Towing' ? 'selected':'' }} >Towing </option>
-              <option value="Petrol/Desiel" {{ $feedback->service_type =='Petrol/Desiel' ? 'selected':'' }} >Petrol/ Desiel</option>
-              <option value="Keyunlock" {{ $feedback->service_type =='Keyunlock' ? 'selected':'' }} >Key unlock </option>
-              <option value="StartingProblem" {{ $feedback->service_type =='StartingProblem' ? 'selected':'' }} >Starting Problem </option>
+            <select class="form-control form-control-solid" name="service_name">
+                     <option value=""> Please service type</option>
+                     @foreach($data1 as $s1)
+                         <option value="{{$s1->service_name}}" {{ $s1->service_name == $s1->service_name ? 'selected' : '' }} >{{$s1->service_name}}</option>
+                     @endforeach
             </select>
         </div>
 
@@ -53,14 +49,14 @@
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_type_title', 1) }}</label>
         
         <div class="col-lg-4 fv-row">
+           
             <select class="form-control form-control-solid" name="vehical_type">
-              <option value=""> Please select vehical type</option>
-              <option value="bike" {{ $feedback->vehical_type=='bike' ? 'selected':'' }} >Bike</option>
-              <option value="car" {{ $feedback->vehical_type=='car' ? 'selected':'' }} >Car</option>
-              <option value="pickup" {{ $feedback->vehical_type=='pickup' ? 'selected':'' }} >Pickup</option>
-              <option value="van" {{ $feedback->vehical_type=='van' ? 'selected':'' }} >Van</option>
-              <option value="truck" {{ $feedback->vehical_type=='truck' ? 'selected':'' }} >truck</option>
+                    <option value=""> select vehical type</option>
+                    @foreach($data as $d1)
+                        <option value="{{$d1->vehical_type}}"  {{ $d1->vehical_type == $d1->vehical_type ? 'selected':'' }} >{{$d1->vehical_type}}</option>
+                    @endforeach
             </select>
+
         </div>
 
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.service_status_title', 1) }}</label>
@@ -122,15 +118,15 @@
     
     <script>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
         $(function () {
-            $('.datetimepicker').datetimepicker();
+               $('.datetimepicker').datetimepicker();
         });
 
     </script>

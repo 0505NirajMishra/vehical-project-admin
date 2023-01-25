@@ -10,6 +10,7 @@
   <tr>
     <th>ID No.</th>
     <th>service name</th>
+    <th>service logo</th>
     <th>ACTION</th>
   </tr>
 
@@ -17,6 +18,7 @@
   <tr>
     <td>{{$user->service_id }}</td>
     <td>{{$user->service_name}}</td>
+    <td><img src="{{ url('/') }}/service/image/{{$user->service_logo}}" style="width:50px; height:50px;" /></td>
     <td>
         <a href="{{ url('/') }}/admin/addservices/{{$user->service_id}}/edit" title="Edit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" >
                     <span class="svg-icon svg-icon-3">
@@ -30,6 +32,5 @@
         </a>  
     </td>
   </tr>
-  @endforeach
-  
+  @endforeach  
 </table>

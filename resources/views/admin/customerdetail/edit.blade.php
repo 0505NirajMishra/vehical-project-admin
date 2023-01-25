@@ -20,13 +20,9 @@
                         <div class="flex-lg-row-fluid me-0 me-lg-20">
                             <!--begin::Form-->
                             {!! Form::model($customerdetail, ['method' => 'PATCH', 'route' => ['admin.customerdetails.update', $customerdetail->customer_id ], 'class' => 'form mb-15', 'enctype' => 'multipart/form-data']) !!}
-                            
                             @csrf
-                            
-                            <input type="hidden" name="id" value="{{ $customerdetail->customer_id   }}">
-                            
+                            <input type="hidden" name="id" value="{{$customerdetail->customer_id}}">
                             @include('admin.customerdetail.editform')
-
                             <!--begin::Actions-->
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
                                 <a href="{{ route('admin.customerdetails.index') }}"

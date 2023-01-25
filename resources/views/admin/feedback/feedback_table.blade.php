@@ -28,7 +28,7 @@
     <td>{{$user->feedback_id}}</td>
     <td>{{$user->description}}</td>
     <td>{{$user->booking_date_time}}</td>
-    <td>{{$user->service_type}}</td>
+    <td>{{$user->service_name}}</td>
     <td>{{$user->service_status}}</td>
     <td>{{$user->vehical_type}}</td>
     <td>{{$user->tyre_type}}</td>

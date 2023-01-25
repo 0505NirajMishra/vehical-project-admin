@@ -65,8 +65,8 @@ class CustomerDetailsController extends Controller
 
     public function create()
     {
-        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type_name","vehical_category_type","vehical_catgeory_id"]);
-        $data1['addservices'] = Addservice::get(["service_name","service_id"]);        
+        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);
+        $data1['addservices'] = Addservice::get(["service_name","service_id"]);
         return view($this->create_view,$data,$data1);
     }
 
@@ -84,7 +84,10 @@ class CustomerDetailsController extends Controller
 
     public function edit(CustomerDetail $customerdetail)
     {
-        return view($this->edit_view, compact('customerdetail'));
+        $data = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);
+        $data1 = Addservice::get(["service_name","service_id"]);
+        
+        return view($this->edit_view,compact('customerdetail','data','data1'));
     }
 
     public function update(CustomerDetailRequest $request,CustomerDetail $customerdetail)

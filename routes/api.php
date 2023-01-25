@@ -73,6 +73,9 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
         // add vehical detail
 
         Route::post('addvehicaldetail','addvehicaldetail');
+        // add service
+
+        Route::post('getservice','getservice'); 
         Route::post('addservice','addservice');        
         
     });

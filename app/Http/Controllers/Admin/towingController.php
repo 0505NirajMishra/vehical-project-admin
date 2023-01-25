@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TowingRequest;
 use App\Models\Towing;
+use App\Models\VehicalCategory;
 use App\Services\towingservices;
 
 use App\Services\CustomerService;
@@ -62,7 +63,8 @@ class towingController extends Controller
 
     public function create()
     {
-        return view($this->create_view);
+        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);
+        return view($this->create_view,$data);
     }
 
     public function store(TowingRequest $request)
@@ -76,8 +78,7 @@ class towingController extends Controller
         $input['vehical_photo'] = $filename;
 
         $battle = $this->towingservice->create($input);
-        return redirect()->route($this->index_route_name)->with('success',
-        $this->mls->messageLanguage('created', 'towing', 1));
+        return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('created', 'towing', 1));
     }
 
     public function show(Towing $towing)
@@ -86,8 +87,9 @@ class towingController extends Controller
     }
 
     public function edit(Towing $towing)
-    {
-        return view($this->edit_view, compact('towing'));
+    {   
+        $data = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);
+        return view($this->edit_view, compact('towing','data'));
     }
 
     public function update(TowingRequest $request,Towing $towing)
@@ -101,14 +103,12 @@ class towingController extends Controller
         $input['vehical_photo'] = $filename;
 
         $this->towingservice->update($input, $towing);
-        return redirect()->route($this->index_route_name)->with('success',
-        $this->mls->messageLanguage('updated', 'update towing', 1));
+        return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('updated', 'update towing', 1));
     }
 
     public function destroy($id)
     {
         $result = DB::table('towings')->where('towing_id', $id)->delete();
-
         return redirect()->back()->withSuccess('Data Delete Successfully!');
 
         if ($result) {

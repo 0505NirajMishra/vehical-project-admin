@@ -25,14 +25,11 @@
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.service_type_title', 1) }}</label>
         
         <div class="col-lg-4 fv-row">
-            <select class="form-control form-control-solid" name="service_type">
-              <option value=""> Please select service type</option>
-              <option value="FlatBattery">Flat Battery </option>
-              <option value="FlatTyre">Flat Tyre</option>
-              <option value="Towing">Towing </option>
-              <option value="Petrol/Desiel">Petrol/ Desiel</option>
-              <option value="Keyunlock">Key unlock </option>
-              <option value="StartingProblem">Starting Problem </option>
+            <select class="form-control form-control-solid" name="service_name">
+                    <option value=""> select service type</option>
+                    @foreach($addservices as $data1)
+                        <option value="{{$data1->service_name}}">{{$data1->service_name}}</option>
+                    @endforeach
             </select>
         </div>
 
@@ -54,12 +51,10 @@
         
         <div class="col-lg-4 fv-row">
             <select class="form-control form-control-solid" name="vehical_type">
-              <option value=""> Please select vehical type</option>
-              <option value="bike">Bike</option>
-              <option value="car">Car</option>
-              <option value="pickup">Pickup</option>
-              <option value="van">Van</option>
-              <option value="truck">truck</option>
+                    <option value=""> select vehical type</option>
+                    @foreach($vehicalcategorys as $data)
+                        <option value="{{$data->vehical_type}}">{{$data->vehical_type}}</option>
+                    @endforeach
             </select>
         </div>
 

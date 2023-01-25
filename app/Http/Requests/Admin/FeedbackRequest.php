@@ -18,7 +18,7 @@ class FeedbackRequest extends FormRequest
             return [
                 'booking_date_time' => 'required',
                 'description' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
-                'service_type' => 'required',
+                'service_name' => 'required',
                 'service_status' => 'required',
                 'vehical_type' => 'required',
                 'tyre_type' => 'required',
@@ -30,7 +30,7 @@ class FeedbackRequest extends FormRequest
             return [
                 'booking_date_time' => 'required',
                 'description' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
-                'service_type' => 'required',
+                'service_name' => 'required',
                 'service_status' => 'required',
                 'vehical_type' => 'required',
                 'tyre_type' => 'required',
@@ -46,7 +46,7 @@ class FeedbackRequest extends FormRequest
         return [
             'description.required' => __('validation.required', ['attribute' => 'Description']),
             'booking_date_time.required' => __('validation.required', ['attribute' => 'Date and Time']),
-            'service_type.required' => __('validation.required', ['attribute' => 'Service Type']),
+            'service_name.required' => __('validation.required', ['attribute' => 'Service Type']),
             'service_status.required' => __('validation.required', ['attribute' => 'Service Status']),
             'calling_status.required' => __('validation.required', ['attribute' => 'Calling Status']),
             'vehical_type.required' => __('validation.required', ['attribute' => 'Vehical Type']),

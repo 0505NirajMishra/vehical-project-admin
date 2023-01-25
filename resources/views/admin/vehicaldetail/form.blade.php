@@ -16,7 +16,7 @@
             <select class="form-control form-control-solid" name="vehical_name">
                     <option value=""> Please select vehical name</option>
                     @foreach($vehicalcategorys as $data)
-                        <option value="{{$data->vehical_type_name}}">{{$data->vehical_type_name}}</option>
+                        <option value="{{$data->vehical_name}}">{{$data->vehical_name}}</option>
                     @endforeach
             </select>
 
@@ -33,7 +33,7 @@
             <select class="form-control form-control-solid" name="vehical_type">
                     <option value=""> select vehical category type</option>
                     @foreach($vehicalcategorys as $data)
-                        <option value="{{$data->vehical_category_type}}">{{$data->vehical_category_type}}</option>
+                        <option value="{{$data->vehical_type}}">{{$data->vehical_type}}</option>
                     @endforeach
             </select>
 

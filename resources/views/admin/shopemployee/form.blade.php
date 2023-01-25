@@ -21,18 +21,33 @@
 
     <div class="row mb-6">
 
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.longitute_title', 1) }}</label>
+
+        <div class="col-lg-4 fv-row">
+                {!! Form::text('longitute', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.longitute', 1)]) !!}
+        </div>
+
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.latitute_title', 1) }}</label>
+
+        <div class="col-lg-4 fv-row">
+                {!! Form::text('latitute', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.latitute', 1)]) !!}
+        </div>
+
+    </div>
+
+    <div class="row mb-6">
+
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.servicetype_title', 1) }}</label>
         
         <div class="col-lg-4 fv-row">
-            <select class="form-control form-control-solid" name="servicetype">
-              <option value=""> Please select service type</option>
-              <option value="FlatBattery">Flat Battery </option>
-              <option value="FlatTyre">Flat Tyre</option>
-              <option value="Towing">Towing </option>
-              <option value="Petrol/Desiel">Petrol/ Desiel</option>
-              <option value="Keyunlock">Key unlock </option>
-              <option value="StartingProblem">Starting Problem </option>
+            
+            <select class="form-control form-control-solid" name="service_name">
+                    <option value=""> select service name</option>
+                    @foreach($addservices as $data1)
+                        <option value="{{$data1->service_name}}">{{$data1->service_name}}</option>
+                    @endforeach
             </select>
+
         </div>
 
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_type_title', 1) }}</label>
@@ -53,12 +68,10 @@
         
         <div class="col-lg-4 fv-row">
             <select class="form-control form-control-solid" name="vehical_type">
-              <option value=""> Please select vehical type</option>
-              <option value="bike">Bike</option>
-              <option value="car">Car</option>
-              <option value="pickup">Pickup</option>
-              <option value="van">Van</option>
-              <option value="truck">truck</option>
+                    <option value=""> select vehical category type</option>
+                    @foreach($vehicalcategorys as $data)
+                        <option value="{{$data->vehical_type}}">{{$data->vehical_type}}</option>
+                    @endforeach
             </select>
         </div>
 
@@ -81,20 +94,21 @@
 
 @push('scripts')
 
-<script>
+    <script>
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 
-    $(function () {
-        $('.datetimepicker').datetimepicker();
-    });
+        $(function () {
+            $('.datetimepicker').datetimepicker();
+        });
 
-</script>
+    </script>
 
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
     {!! JsValidator::formRequest('App\Http\Requests\Admin\ShopEmployeeRequest', 'form') !!}
+
 @endpush

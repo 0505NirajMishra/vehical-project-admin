@@ -6,26 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-     /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     
     public function up()
     {
         Schema::create('addservices', function (Blueprint $table) {
             $table->increments('service_id');
             $table->string('service_name');
+            $table->string('service_logo');
             $table->timestamps();
         });
     }
 
-     /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
 
     public function down()
     {

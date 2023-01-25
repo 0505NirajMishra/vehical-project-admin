@@ -65,7 +65,7 @@ class VehicaldetailController extends Controller
 
     public function create()
     {
-        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type_name","vehical_category_type","vehical_catgeory_id"]);
+        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_name","vehical_type","vehical_catgeory_id"]);
         return view($this->create_view,$data);
     }
 
@@ -84,7 +84,8 @@ class VehicaldetailController extends Controller
 
     public function edit(VehicalDetail $addvehicaldetail)
     {
-        return view($this->edit_view, compact('addvehicaldetail'));
+        $data = VehicalCategory::get(["vehical_name","vehical_type","vehical_catgeory_id"]);
+        return view($this->edit_view, compact('addvehicaldetail','data'));
     }
 
     public function update(VehicalDetailRequest $request, VehicalDetail $addvehicaldetail)

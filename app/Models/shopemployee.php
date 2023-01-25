@@ -16,7 +16,9 @@ class shopemployee extends Model
     protected $fillable = [
        'booking_date_time',
        'location',
-       'servicetype',
+       'longitute',
+       'latitute',
+       'service_name',
        'tyre_type',
        'vehical_type',
        'service_status'

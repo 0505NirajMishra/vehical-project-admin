@@ -22,7 +22,7 @@ class VehicalDetailRequest extends FormRequest
                 'vehical_type' => 'required',
                 'vehical_company_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
                 'vehical_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
-                'vehical_registration_no' => 'required',
+                'vehical_registration_no' => 'required|alpha_num',
             ];
         } else {
             return 
@@ -31,7 +31,7 @@ class VehicalDetailRequest extends FormRequest
                 'vehical_type' => 'required',
                 'vehical_company_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
                 'vehical_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
-                'vehical_registration_no' => 'required',
+                'vehical_registration_no' => 'required|alpha_num',
             ];
         }
     }

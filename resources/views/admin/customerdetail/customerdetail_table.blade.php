@@ -13,6 +13,8 @@
     <th>booking date and time</th>
     <th>service status</th>
     <th>location</th>
+    <th>longitute</th>
+    <th>latitute</th>
     <th>service type</th>
     <th>tyre type</th>
     <th>vehical type</th>
@@ -28,7 +30,9 @@
     <td>{{$user->booking_date_time}}</td>
     <td>{{$user->service_status}}</td>
     <td>{{$user->location}}</td>
-    <td>{{$user->servicetype}}</td>
+    <td>{{$user->longitute}}</td>
+    <td>{{$user->latitute}}</td>
+    <td>{{$user->service_name}}</td>
     <td>{{$user->tyre_type}}</td>
     <td>{{$user->vehical_type}}</td>
     <td>

@@ -15,7 +15,7 @@ class Feedback extends Model
 
     protected $fillable = [
        'booking_date_time',
-       'service_type',
+       'service_name',
        'service_status',
        'vehical_type',
        'tyre_type',

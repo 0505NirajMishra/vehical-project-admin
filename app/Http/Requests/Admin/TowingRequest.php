@@ -18,7 +18,7 @@ class TowingRequest extends FormRequest
             return [
                 'vehical_type' => 'required',
                 'vehical_photo' => 'required',
-                'vehical_registration_no' => 'required',
+                'vehical_registration_no' => 'required|alpha_num',
                 'service_location' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
                 'service_longitude' => 'required',
                 'service_latitude' => 'required',
@@ -29,7 +29,7 @@ class TowingRequest extends FormRequest
             return [
                 'vehical_type' => 'required',
                 'vehical_photo' => 'required',
-                'vehical_registration_no' => 'required',
+                'vehical_registration_no' => 'required|alpha_num',
                 'service_location' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
                 'service_longitude' => 'required',
                 'service_latitude' => 'required',

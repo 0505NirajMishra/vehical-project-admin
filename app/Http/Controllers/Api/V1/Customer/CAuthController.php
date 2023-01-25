@@ -127,6 +127,13 @@ class CAuthController extends Controller
         return $this->apiAuthService->getemployee();
     }
 
+    // get services 
+
+    public function getservice()
+    {
+        return $this->apiAuthService->getservice();
+    }
+
     // get keyunlock 
 
     public function getkeyunlock()

@@ -12,7 +12,9 @@ return new class extends Migration
             $table->increments('shopemployee_id');
             $table->string('booking_date_time');
             $table->string('location');
-            $table->string('servicetype');
+            $table->string('longitute');
+            $table->string('latitute');
+            $table->string('service_name');
             $table->string('tyre_type');
             $table->string('vehical_type');
             $table->string('service_status');
@@ -24,4 +26,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('shopemployees');
     }
+    
 };

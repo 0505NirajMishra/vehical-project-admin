@@ -19,20 +19,24 @@
 
     <div class="row mb-6">
         
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_type_title', 1) }}</label>
         <div class="col-lg-4 fv-row">
             <select class="form-control form-control-solid" name="vehical_type">
-              <option value=""> Please Vehical Type</option>
-              <option value="bike" {{ $addvehicaldetail->vehical_type=='bike' ? 'selected':''}} >bike</option>
-              <option value="car" {{ $addvehicaldetail->vehical_type=='car' ? 'selected':''}} }} >car</option>
-              <option value="pickup" {{ $addvehicaldetail->vehical_type=='pickup' ? 'selected':''}} }} >pickup</option>
-              <option value="van" {{ $addvehicaldetail->vehical_type=='van' ? 'selected':''}} }} >van</option>
+                     <option value="">Please vehical type</option>
+                     @foreach($data as $t1)
+                         <option value="{{$t1->vehical_type}}" {{ $t1->vehical_type == $t1->vehical_type ? 'selected' : '' }} >{{$t1->vehical_type}}</option>
+                     @endforeach
             </select>
         </div>
 
         <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.vehical_name_title', 1) }}</label>
-        
         <div class="col-lg-4 fv-row">
-                {!! Form::text('vehical_name', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.vehical_name', 1)]) !!}
+            <select class="form-control form-control-solid" name="vehical_name">
+                    <option value="">Please select vehical name</option>
+                    @foreach($data as $d1)
+                        <option value="{{$d1->vehical_name}}">{{$d1->vehical_name}}</option>
+                    @endforeach
+            </select>
         </div>
 
     </div>

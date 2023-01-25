@@ -14,9 +14,9 @@ class VehicalCategory extends Model
     protected $primaryKey = 'vehical_catgeory_id';
 
     protected $fillable = [
-       'vehical_type_name',
+       'vehical_name',
        'vehical_logo',
-       'vehical_category_type'
+       'vehical_type'
     ];
 
 }

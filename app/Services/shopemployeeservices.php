@@ -47,7 +47,7 @@ class shopemployeeservices
 
     public static function datatable()
     {
-        $data = DB::table('shopemployees')->orderBy('created_at', 'desc')->get();
+        $data = DB::table('shopemployees')->orderBy('created_at', 'asc')->get();
         return $data;
     }
 }

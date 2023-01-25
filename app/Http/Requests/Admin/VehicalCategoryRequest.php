@@ -17,15 +17,15 @@ class VehicalCategoryRequest extends FormRequest
         if (!request()->is('admin/vehicalcategory/create')) 
         {
             return [
-                'vehical_type_name' => 'required',
+                'vehical_name' => 'required',
                 'vehical_logo' => 'required',
-                'vehical_category_type' => 'required',
+                'vehical_type' => 'required',
             ];
         } else {
             return [
-                'vehical_type_name' => 'required',
+                'vehical_name' => 'required',
                 'vehical_logo' => 'required',
-                'vehical_category_type' => 'required',
+                'vehical_type' => 'required',
             ];
         }
     }
@@ -33,9 +33,9 @@ class VehicalCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'vehical_type_name.required' => __('validation.required', ['attribute' => 'Vehical type name']),
+            'vehical_name.required' => __('validation.required', ['attribute' => 'Vehical type name']),
             'vehical_logo.required' => __('validation.required', ['attribute' => 'Vehical profile']),
-            'vehical_category_type.required' => __('validation.required', ['attribute' => 'Vehical category type']),
+            'vehical_type.required' => __('validation.required', ['attribute' => 'Vehical category type']),
         ];
     } 
     

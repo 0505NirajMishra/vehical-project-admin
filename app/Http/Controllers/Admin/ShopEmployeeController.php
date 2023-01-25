@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ShopEmployeeRequest;
 use App\Models\shopemployee;
+use App\Models\VehicalCategory;
+use App\Models\Addservice;
 use App\Services\shopemployeeservices;
 
 use App\Services\CustomerService;
@@ -62,10 +64,13 @@ class ShopEmployeeController extends Controller
 
     public function create()
     {
-        return view($this->create_view);
+        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);
+        $data1['addservices'] = Addservice::get(["service_name","service_id"]);
+
+        return view($this->create_view,$data,$data1);
     }
 
-    public function store(ShopEmployeeRequest $request)
+    public function store(Request $request)
     {
         $input = $request->except(['_token', 'proengsoft_jsvalidation']);
         $battle = $this->shopemployee->create($input);
@@ -80,7 +85,10 @@ class ShopEmployeeController extends Controller
 
     public function edit(shopemployee $shopemployee)
     {
-        return view($this->edit_view, compact('shopemployee'));
+        $data = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);
+        $data1 = Addservice::get(["service_name","service_id"]);
+        
+        return view($this->edit_view, compact('shopemployee','data','data1'));
     }
 
     public function update(ShopEmployeeRequest $request,shopemployee $shopemployee)

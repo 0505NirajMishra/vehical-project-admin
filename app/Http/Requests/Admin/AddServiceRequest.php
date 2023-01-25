@@ -18,12 +18,14 @@ class AddServiceRequest extends FormRequest
         {
             return [
                 'service_name' => 'required',
+                'service_logo' => 'required',
             ];
         } 
         else 
         {
             return [
                 'service_name' => 'required',
+                'service_logo' => 'required',
             ];
         }
     }
@@ -31,7 +33,8 @@ class AddServiceRequest extends FormRequest
     public function messages()
     {
         return [
-            'service_name.required' => __('validation.required', ['attribute' => 'service name']),           
+            'service_name.required' => __('validation.required', ['attribute' => 'service name']),
+            'service_logo.required' => __('validation.required', ['attribute' => 'service logo']),           
         ];
     } 
     

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\KeyunlockRequest;
 use App\Models\Keyunlock;
+use App\Models\Addservice;
+use App\Models\VehicalCategory;
 use App\Services\keyunlockservices;
 
 use App\Services\CustomerService;
@@ -61,8 +63,9 @@ class KeyunlockController extends Controller
     }
 
     public function create()
-    {
-        return view($this->create_view);
+    {   
+        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);     
+        return view($this->create_view,$data);
     }
 
     public function store(KeyunlockRequest $request)
@@ -86,7 +89,8 @@ class KeyunlockController extends Controller
 
     public function edit(Keyunlock $keyunlock)
     {
-        return view($this->edit_view, compact('keyunlock'));
+        $data = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);     
+        return view($this->edit_view, compact('keyunlock','data'));
     }
 
     public function update(KeyunlockRequest $request,Keyunlock $keyunlock)
