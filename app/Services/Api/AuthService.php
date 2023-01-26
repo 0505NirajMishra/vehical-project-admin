@@ -456,8 +456,19 @@ class AuthService
         $input = 
         [
             'service_name' => $request->service_name,
+            'service_logo' => $request->service_logo,
         ]; 
         
+        $image=$request->file('service_logo');
+        
+        $filename = time().$image->getClientOriginalName();
+        
+        $destinationPath = public_path('/service/image/');
+        
+        $image->move($destinationPath, $filename);
+        
+        $input['service_logo']=$filename;
+
         $doctor = Addservice::create($input);
 
         if($doctor) 
@@ -1024,7 +1035,6 @@ class AuthService
         }
     }
 
-
     // add vehical employee
 
     public static function addemployee(Request $request){
@@ -1092,70 +1102,6 @@ class AuthService
     }
 
 
-    //Api For Change User Password
- 
-    public static function user_change_password(Request $request){
-        $validator=Validator::make($request->all(),[
-            'old_password'=>'required',
-            'password'=>'required|min:2|max:100',
-            'confirm_password'=>'required|same:password',
-            
-        ]);
-        if($validator->fails()){
-            return response()->json([
-                'message'=>'Validation fails',
-                'error'=>$validator->errors()
-            ],400);
-        }
-
-        $user=$request->user();
-        if(Hash::check($request->old_password,$user->password)){
-            $user->update([
-                'password'=>Hash::make($request->password)
-            ]);
-            return response()->json([
-                'message'=>'Password Update Successfully',
-            ],200);
-        }else{
-            return response()->json([
-                'message'=>'Old Password does not matched',
-            ],400);
-        }
-    }
-
-    //Api For User Edit User Profile 
-    public static function user_edit_profile(Request $request){  
-       
-            $validator=Validator::make($request->all(),[
-                'name'=>'required|min:2|max:100',
-                'l_name'=>'required|min:2|max:100',
-                'email'=>'required|min:2|max:100',
-                'phone'=>'required',
-                'gender'=>'required|min:2|max:100',
-            ]);
-            if($validator->fails()){
-                return response()->json([
-                    'message'=>'Validation fails',
-                    'error'=>$validator->errors()
-                ],400);
-            }
-
-            $user=$request->user();
-            
-            $user->update([
-                'name'=>$request->name,
-                'l_name'=>$request->l_name,
-                'email'=>$request->email,
-                'phone'=>$request->phone,
-                'gender'=>$request->gender,
-            ]);
-                
-            return response()->json([
-                    'message'=>'Profile Update Successfully',
-            ],200);
-        
-    }
-
     //Api For Get catgeory
 
     public static function get_category(){
@@ -1205,238 +1151,14 @@ class AuthService
                     200
                 );
             }
-        }
-
-
-    //Api For Get Advisor By Counsilar Id
-    public static function  shor_by_advisory(Request $request){
-        $status = User::where('user_type','1')->where('advisory',$request->advisory)->get();
-        if (count($status)>0) {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $status
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    }
-
-    //Api For Update Password By User ID
-        
-    public static function update_password(Request $request)
-    {
-            $updateUser = DB::table('users')->where('id',$request->user_id)->update(array('password' =>  Hash::make($request->password)));
-        
-            if ($updateUser) {
-                return response()->json(
-                    [
-                        'status' => true,
-                        'message' => 'Data Update successfully',
-                        'data' => $updateUser 
-                    ],
-                    200
-                );
-            } else {
-                return response()->json(
-                    [
-                        'status' => false,
-                        'message' => 'Data not Updated',
-                        'data' =>[],
-                    ],
-                    200
-                );
-            }
     }
 
 
-    //Api For Set Availablity
-        
-    public static function set_availablity(Request $request){
-        
-            if($request->isMethod('post')){
-                $data = $request->all();
-    
-                foreach($data['set_availablitys'] as $key => $value){
-                    $availability = new SetAvailability();
-                    $availability->date = $value['date'];
-                    $availability->start_time = $value['start_time'];
-                    $availability->end_time = $value['end_time'];
-                    $availability->consultant = $value['consultant'];
-                    $availability->save();
-                }
-                // return response()->json(['message'=>'Data added Successfully']);
-                if ($data) {
-                        return response()->json(
-                            [
-                                'status' => true,
-                                'message' => 'Data Insert successfully',
-                                'data' => $data 
-                            ],
-                            200
-                        );
-                    } else {
-                        return response()->json(
-                            [
-                                'status' => false,
-                                'message' => 'Data not Found',
-                                'data' =>[],
-                            ],
-                            200
-                        );
-             }
-            }
-        }
-
-    //Api For Insert Book_An_Appointment
-    public static function book_appointment(Request $request)
-    {     
-        $input = 
-        [
-        'date' => $request->date,
-        'start_time' => $request->start_time,
-        'end_time' => $request->end_time,
-        'package_id' => $request->package_id,
-        'consultant_id' => $request->consultant_id,
-        'vat_no' => $request->vat_no,
-        'promocode' => $request->promocode,
-        'promo_id' => $request->promo_id,
-        'status' => $request->status,
-         ];
-        $availability = BookAnAppointmentService::create($input);
-  
-         if ($availability) {
-            return response()->json(
-            [
-                'status' => true,
-                'message' => 'Data Insert successfully',
-                'data' => $availability 
-            ],
-            200
-             );
-             } else {
-        return response()->json(
-            [
-                'status' => false,
-                'message' => 'Data not Inserted',
-                'data' =>[],
-            ],
-            200
-             );
-            }
-    }
-
-    //Api For Insert Rating
-    public static function rating(Request $request)
-    {  
-        $input = 
-        [
-        'rating' => $request->rating,
-        // 'user_id' => $request->user_id,
-        'counsler_id' => $request->counsler_id,
-        ];
-        $rating = RatingService::create($input);
-  
-        if ($rating) {
-        return response()->json(
-            [
-                'status' => true,
-                'message' => 'Data Insert successfully',
-                'data' => $rating 
-            ],
-            200
-                );
-             } else {
-        return response()->json(
-            [
-                'status' => false,
-                'message' => 'Data not Inserted',
-                'data' =>[],
-            ],
-            200
-            );
-            }
-    }
-
-
-     //Api For Insert Rating
-     public static function review(Request $request)
-     {
-         
-        $input = 
-        [
-         'review' => $request->review,  
-         'counsler_id' => $request->counsler_id,
  
-        ];
-         
-        $review = ReviewService::create($input);
-   
-        if ($review) {
-         return response()->json(
-             [
-                 'status' => true,
-                 'message' => 'Data Insert successfully',
-                 'data' => $review 
-             ],
-             200
-             );
-          } else {
-         return response()->json(
-             [
-                 'status' => false,
-                 'message' => 'Data not Inserted',
-                 'data' =>[],
-             ],
-             200
-         );
-         }
-     }
 
-     //Api For Insert Book_An_Appointment
-    public static function contact_us(ContactUsRequest $request)
-    {       
-         $input = 
-        [
-        'user_name' => $request->user_name,
-        'phone' => $request->phone,
-        'gender' => $request->gender,
-        'messages' => $request->messages,
-        
-        ];    
-         $contact = ContactUsService::create($input);
   
-            if ($contact) {
-        return response()->json(
-            [
-                'status' => true,
-                'message' => 'Data Insert successfully',
-                'data' => $contact 
-            ],
-            200
-              );
-            }  else {
-        return response()->json(
-            [
-                'status' => false,
-                'message' => 'Data not Inserted',
-                'data' =>[],
-            ],
-            200
-         );
-            }
-    }
 
+    
     //Api For Consultant Review
     public static function consultant_review(Request $request){
         
@@ -1464,8 +1186,6 @@ class AuthService
         }
     }
 
-    
-
     //Api For Get Advisor By Counsilar Id
     public static function  availablity_by_consultant(Request $request){
         $result = Rating::where('consultant_id',$request->consultant_id)->get();
@@ -1492,57 +1212,7 @@ class AuthService
 
     
 
-    //Api For Get User By advisory Id where user_type =0
-     public static function  user_by_advisory(Request $request)
-     {
-        $result = User::where('user_type','0')->where('advisory',$request->advisory)->get();  
-            if (count($result)>0) {
-                return response()->json(
-                    [
-                        'status' => true,
-                        'message' => 'Data Find successfully',
-                        'data' => $result
-                    ],
-                    200
-                );
-            } else {
-                return response()->json(
-                    [
-                        'status' => false,
-                        'message' => 'Data not Found',
-                        'data' =>[],
-                    ],
-                    200
-                );
-            }
-        }
-
-
-          //Api For Get Advisory
-
-          public static function  get_package(){
-            $package = Package::get();
-            if (count($package)>0) {
-                return response()->json(
-                    [
-                        'status' => true,
-                        'message' => 'Data Find successfully',
-                        'data' => $package
-                    ],
-                    200
-                );
-            } else {
-                return response()->json(
-                    [
-                        'status' => false,
-                        'message' => 'Data not Found',
-                        'data' =>[],
-                    ],
-                    200
-                );
-            }
-        }
-
+   
 
     
     public static function logout(Request $request)

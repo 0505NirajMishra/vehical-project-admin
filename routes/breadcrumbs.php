@@ -121,6 +121,15 @@ Breadcrumbs::resource('cares', $mls->messageLanguage('only_name', 'care', 2));
 /*------------- Admin vehical detail------------------------*/
 Breadcrumbs::resource('addvehicaldetails', $mls->messageLanguage('only_name', 'addvehicaldetail', 2));
 
+/*------------- Admin vehical petrol/desial ------------------------*/
+Breadcrumbs::resource('petroldesials', $mls->messageLanguage('only_name', 'petroldesial', 2));
+
+/*------------- Admin vehical flat/battery ------------------------*/
+Breadcrumbs::resource('flatbatterys', $mls->messageLanguage('only_name', 'flatbattery', 2));
+
+/*------------- Admin vehical flattyre ------------------------*/
+Breadcrumbs::resource('flattyres', $mls->messageLanguage('only_name', 'flattyre', 2));
+
 /*------------- Admin add service ------------------------*/
 Breadcrumbs::resource('addservices', $mls->messageLanguage('only_name', 'addservice', 2));
 

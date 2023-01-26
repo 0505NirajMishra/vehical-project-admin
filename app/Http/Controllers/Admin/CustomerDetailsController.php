@@ -86,7 +86,6 @@ class CustomerDetailsController extends Controller
     {
         $data = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);
         $data1 = Addservice::get(["service_name","service_id"]);
-        
         return view($this->edit_view,compact('customerdetail','data','data1'));
     }
 

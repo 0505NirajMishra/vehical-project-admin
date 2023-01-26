@@ -912,6 +912,76 @@ return [
 
         'service_name'=>'service name',            
         'service_name_title'=>'service name',
-        'servicename' => 'service name'
+        'servicename' => 'service name',
+
+         // petrol/desiel
+
+         'vehical_type'=>'vehical type',
+         'fuel_type'=>'fuel type',
+         'fuel_quantity'=>'fuel quantity',
+         'vehical_registration_no'=>'vehical registration no',
+         'vehical_image'=>'vehical image',
+         'longitude'=>'longitude',
+         'latitude'=>'latitude',
+         'location'=>'location',
+         'description'=>'description',
+        
+         'vehical_type_title'=>'vehical type',
+         'fuel_type_title'=>'fuel type',
+         'fuel_quantity_title'=>'fuel quantity',
+         'vehical_registration_no_title'=>'vehical registration no',
+         'vehical_image_title'=>'vehical image',
+         'longitude_title'=>'longitude',
+         'latitude_title'=>'latitude',
+         'location_title'=>'location',
+         'description_title'=>'description',
+       
+         'petroldesiel' => 'Petrol Desiel',
+        
+         // flatbattery
+
+         'vehical_type'=>'vehical type',
+         'battery_photo' => 'battery photo',
+         'vehical_registration_no'=>'vehical registration no',
+         'vehical_image'=>'vehical image',
+         'longitude'=>'longitude',
+         'latitude'=>'latitude',
+         'location'=>'location',
+         'description'=>'description',
+        
+         'vehical_type_title'=>'vehical type',
+         'battery_photo_title' => 'battery photo',
+         'vehical_registration_no_title'=>'vehical registration no',
+         'vehical_image_title'=>'vehical image',
+         'longitude_title'=>'longitude',
+         'latitude_title'=>'latitude',
+         'location_title'=>'location',
+         'description_title'=>'description',
+       
+         'flatbattery' => 'Flat Battery',
+
+         // flattyre
+
+         'vehical_type'=>'vehical type',
+         'tube_tyre'=>'tube tyre',
+         'tyre_size'=>'tyre size',
+         'vehical_registration_no'=>'vehical registration no',
+         'tyresize_image'=>'vehical image',
+         'longitude'=>'longitude',
+         'latitude'=>'latitude',
+         'location'=>'location',
+         'description'=>'description',
+        
+         'vehical_type_title'=>'vehical type',
+         'tube_tyre_title'=>'tube tyre',
+         'tyre_size_title'=>'tyre size',
+         'vehical_registration_no_title'=>'vehical registration no',
+         'tyresize_image_title'=>'tyre size image',
+         'longitude_title'=>'longitude',
+         'latitude_title'=>'latitude',
+         'location_title'=>'location',
+         'description_title'=>'description',
+       
+         'flattyre' => 'Flat Tyre',
 
 ];  

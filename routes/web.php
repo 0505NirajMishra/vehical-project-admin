@@ -225,6 +225,30 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
         });
         Route::resource('/addservices',AddServiceController::class);
 
+        // petrol/desiel
+
+        Route::controller(PetroldesielController::class)->group(function () {
+            Route::get('/petroldesials/status/{id}/{status}','status')->name('petroldesials.status');
+            Route::get('/petroldesials/destroy/{id}/','destroy')->name('petroldesials.destroy');
+        });
+        Route::resource('/petroldesials',PetroldesielController::class);
+
+        // flat/battery
+
+        Route::controller(flatbatteryController::class)->group(function () {
+            Route::get('/flatbatterys/status/{id}/{status}','status')->name('flatbatterys.status');
+            Route::get('/flatbatterys/destroy/{id}/','destroy')->name('flatbatterys.destroy');
+        });
+        Route::resource('/flatbatterys',flatbatteryController::class);
+
+        // flat tyre
+
+        Route::controller(flattyreController::class)->group(function () {
+            Route::get('/flattyres/status/{id}/{status}','status')->name('flattyres.status');
+            Route::get('/flattyres/destroy/{id}/','destroy')->name('flattyres.destroy');
+        });
+        Route::resource('/flattyres',flattyreController::class);
+
         //Setting manager
         Route::controller(SettingController::class)->group(function () {
             Route::get('/settings/general', 'edit_general')->name('settings.edit_general');
