@@ -73,10 +73,19 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
         // add vehical detail
 
         Route::post('addvehicaldetail','addvehicaldetail');
+        
         // add service
-
         Route::post('getservice','getservice'); 
         Route::post('addservice','addservice');        
+
+        // add flat tyre
+        Route::post('addflattyre','addflattyre'); 
+
+        // add flat battery
+        Route::post('addflatbattery','addflatbattery'); 
+        
+        // add petrol desiel
+        Route::post('addpetroldesiel','addpetroldesiel'); 
         
     });
 

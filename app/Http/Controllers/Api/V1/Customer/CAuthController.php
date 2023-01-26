@@ -18,6 +18,10 @@ use App\Http\Requests\Admin\TowingRequest;
 use App\Http\Requests\Admin\CareRequest;
 use App\Http\Requests\Admin\ShopEmployeeRequest;
 use App\Http\Requests\Admin\VehicalDetailRequest;
+use App\Http\Requests\Admin\flattyreRequest;
+use App\Http\Requests\Admin\flatBatteryRequest;
+use App\Http\Requests\Admin\PetroldesielRequest;
+
 use App\Http\Requests\ApiChangePasswordRequest;
 use App\Http\Requests\ApiConsultantRequest;
 use App\Http\Requests\Admin\ContactUsRequest;
@@ -75,7 +79,27 @@ class CAuthController extends Controller
     {
         return $this->apiAuthService->addservice($request);
     }
-    
+
+    // add flattyre
+
+    public function addflattyre(flattyreRequest $request)
+    {
+        return $this->apiAuthService->addflattyre($request);
+    }
+
+    // add flatbattery
+
+    public function addflatbattery(flatBatteryRequest $request)
+    {
+        return $this->apiAuthService->addflatbattery($request);
+    }
+
+    // add petrol/desiel
+
+    public function addpetroldesiel(PetroldesielRequest $request)
+    {
+        return $this->apiAuthService->addpetroldesiel($request);
+    }
 
     // add vehical type 
 
@@ -83,6 +107,8 @@ class CAuthController extends Controller
     {
         return $this->apiAuthService->addvehicalcategory($request);
     }
+
+    
 
     // get vehical type
 

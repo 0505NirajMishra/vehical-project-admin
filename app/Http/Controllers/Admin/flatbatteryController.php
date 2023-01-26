@@ -79,9 +79,9 @@ class flatbatteryController extends Controller
         $input['vehical_image'] = $filename;
 
         $image1 = $request->file('battery_photo');
-        $filename1 = time() . $image->getClientOriginalName();
-        $destinationPath = public_path('/vehicalcategory/image/');
-        $image1->move($destinationPath, $filename1);
+        $filename1 = time() . $image1->getClientOriginalName();
+        $destinationPath1 = public_path('/vehicalcategory/image/');
+        $image1->move($destinationPath1, $filename1);
         $input['battery_photo'] = $filename1;
 
         $battle = $this->flatbattery->create($input);
@@ -104,7 +104,7 @@ class flatbatteryController extends Controller
     {
         $input = $request->except(['_method', '_token', 'proengsoft_jsvalidation']);
 
-        if (!empty($input['vehical_image'])||!empty($input['battery_photo'])) 
+        if (!empty($input['vehical_image']) || !empty($input['battery_photo'])) 
         {
             $image = $request->file('vehical_image');
             $filename = time() . $image->getClientOriginalName();
@@ -114,8 +114,8 @@ class flatbatteryController extends Controller
 
             $image1 = $request->file('battery_photo');
             $filename1 = time() . $image1->getClientOriginalName();
-            $destinationPath = public_path('/vehicalcategory/image/');
-            $image1->move($destinationPath, $filename1);
+            $destinationPath1 = public_path('/vehicalcategory/image/');
+            $image1->move($destinationPath1, $filename1);
             $input['battery_photo'] = $filename1;
 
             $this->flatbattery->update($input, $flatbattery);

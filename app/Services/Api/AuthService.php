@@ -23,6 +23,9 @@ use App\Models\Care;
 use App\Models\Rating;
 use App\Models\VehicalDetail;
 use App\Models\Addservice;
+use App\Models\flattyre;
+use App\Models\flatBattery;
+use App\Models\PetrolDesiel;
 
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Hash;
@@ -492,6 +495,153 @@ class AuthService
                 200
             );
         }
+    }
+
+    // add flat tyre
+
+    public static function addflattyre(Request $request){
+           
+        $input = 
+        [
+            'vehical_type' => $request->vehical_type,
+            'tube_tyre' => $request->tube_tyre,
+            'tyre_size' => $request->tyre_size,
+            'vehical_registration_no' => $request->vehical_registration_no,
+            'location' => $request->location,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'description' => $request->description,
+        ]; 
+        
+        $image=$request->file('tyresize_image');
+        $filename = time().$image->getClientOriginalName();
+        $destinationPath = public_path('/vehicalcategory/image/');
+        $image->move($destinationPath, $filename);
+        $input['tyresize_image']=$filename;
+        $doctor = flattyre::create($input);
+
+        if($doctor) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
+                ],
+                200
+            );
+            } 
+            else {
+                return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // add flat battery
+
+    public static function addflatbattery(Request $request){
+           
+        $input = 
+        [
+            'vehical_type' => $request->vehical_type,
+            'vehical_registration_no' => $request->vehical_registration_no,
+            'location' => $request->location,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'description' => $request->description,
+        ]; 
+        
+        $image=$request->file('battery_photo');
+        $filename = time().$image->getClientOriginalName();
+        $destinationPath = public_path('/vehicalcategory/image/');
+        $image->move($destinationPath, $filename);
+        $input['battery_photo']=$filename;
+
+
+        $image1=$request->file('vehical_image');
+        $filename1 = time().$image1->getClientOriginalName();
+        $destinationPath1 = public_path('/vehicalcategory/image/');
+        $image1->move($destinationPath1, $filename1);
+        $input['vehical_image']=$filename1;
+
+
+        $doctor = flatBattery::create($input);
+
+        if($doctor) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
+                ],
+                200
+            );
+            } 
+            else {
+                return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+    }
+
+    // add petrol/desiel
+
+    public static function addpetroldesiel(Request $request){
+           
+        $input = 
+        [
+            'vehical_type' => $request->vehical_type,
+            'fuel_type' => $request->fuel_type,
+            'fuel_quantity' => $request->fuel_quantity,
+            'vehical_registration_no' => $request->vehical_registration_no,
+            'location' => $request->location,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'description' => $request->description,
+        ]; 
+        
+        $image1=$request->file('vehical_image');
+        $filename1 = time().$image1->getClientOriginalName();
+        $destinationPath1 = public_path('/vehicalcategory/image/');
+        $image1->move($destinationPath1, $filename1);
+        $input['vehical_image']=$filename1;
+
+        $doctor = PetrolDesiel::create($input);
+
+        if($doctor) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $doctor
+                ],
+                200
+            );
+            } 
+            else {
+                return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+
     }
 
     // add vehical detail 
