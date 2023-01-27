@@ -27,7 +27,7 @@
     <td>{{$user->flattyre_id}}</td>
     <td>{{$user->vehical_type}}</td>
     <td>{{$user->tube_tyre}}</td>
-    <td>{{$user->tyre_size}}</td>
+    <td>{{$user->tyre_width}}/{{$user->tyre_wheel_size}}/{{$user->tyre_speed_rating}}</td>
     <td> 
       <img src="{{ url('/') }}/vehicalcategory/image/{{$user->tyresize_image}}" 
        style="width:50px; height:50px;" />

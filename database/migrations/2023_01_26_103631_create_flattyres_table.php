@@ -13,7 +13,9 @@ return new class extends Migration
             $table->increments('flattyre_id');
             $table->string('vehical_type');
             $table->string('tube_tyre');
-            $table->string('tyre_size');
+            $table->string('tyre_width');
+            $table->string('tyre_wheel_size');
+            $table->string('tyre_speed_rating');
             $table->string('vehical_registration_no');
             $table->string('tyresize_image');
             $table->string('location');
@@ -29,4 +31,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('flattyres');
     }
+    
 };

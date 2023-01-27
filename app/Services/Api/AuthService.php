@@ -412,8 +412,8 @@ class AuthService
            
         $input = 
         [
-            'vehical_type_name' => $request->vehical_type_name,
-            'vehical_category_type' => $request->vehical_category_type,
+            'vehical_name' => $request->vehical_name,
+            'vehical_type' => $request->vehical_type,
             'vehical_logo' => $request->vehical_logo,
         ]; 
         
@@ -505,7 +505,9 @@ class AuthService
         [
             'vehical_type' => $request->vehical_type,
             'tube_tyre' => $request->tube_tyre,
-            'tyre_size' => $request->tyre_size,
+            'tyre_width' => $request->tyre_width,
+            'tyre_wheel_size' => $request->tyre_wheel_size,
+            'tyre_speed_rating' => $request->tyre_speed_rating,
             'vehical_registration_no' => $request->vehical_registration_no,
             'location' => $request->location,
             'longitude' => $request->longitude,

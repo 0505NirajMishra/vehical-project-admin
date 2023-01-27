@@ -17,7 +17,9 @@ class flattyre extends Model
     [
        'vehical_type',
        'tube_tyre',
-       'tyre_size',
+       'tyre_width',
+       'tyre_wheel_size',
+       'tyre_speed_rating',
        'vehical_registration_no',
        'tyresize_image',
        'location',

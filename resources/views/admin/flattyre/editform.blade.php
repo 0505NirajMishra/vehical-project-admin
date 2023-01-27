@@ -77,15 +77,26 @@
                 @endif
             </div>
 
-            <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_size_title', 1) }}</label>
+            <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_width_title', 1) }}</label>
 
             <div class="col-lg-4 fv-row">
+                {!! Form::text('tyre_width', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.tyre_width', 1)]) !!}
+            </div>
 
-                <select class="form-control form-control-solid" name="tyre_size">
-                        <option value=""> select tyre size</option>
-                        <option value="225/70/R16 91S" {{ $flattyre->tyre_size=="225/70/R16 91S" ? 'selected' : '' }} >225/70/R16 91S</option>
-                </select>
+        </div>
 
+        <div class="row mb-6">
+            
+            <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_wheel_size_title', 1) }}</label>
+
+            <div class="col-lg-4 fv-row">
+                {!! Form::text('tyre_wheel_size', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.tyre_wheel_size', 1)]) !!}
+            </div>
+
+            <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_speed_rating_title', 1) }}</label>
+
+            <div class="col-lg-4 fv-row">
+                {!! Form::text('tyre_speed_rating', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.tyre_speed_rating', 1)]) !!}
             </div>
 
         </div>

@@ -241,7 +241,6 @@ class CAuthController extends Controller
         return $this->apiAuthService->addcare($request);
     }
 
-
     // delete vehical 
     public function deleteemployee($id)
     {

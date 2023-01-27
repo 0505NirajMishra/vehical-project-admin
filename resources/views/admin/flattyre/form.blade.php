@@ -72,17 +72,30 @@
                 <input type="file" class="form-control form-control-lg form-control-solid" name="tyresize_image" accept=".png, .jpg, .jpeg">
             </div>
 
-            <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_size_title', 1) }}</label>
+            <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_width_title', 1) }}</label>
 
-                <div class="col-lg-4 fv-row">
+            <div class="col-lg-4 fv-row">
+                  {!! Form::text('tyre_width', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.tyre_width', 1)]) !!}
+            </div>
 
-                    <select class="form-control form-control-solid" name="tyre_size">
-                            <option value=""> select tube size</option>
-                            <option value="225/70/R16 91S">225/70/R16 91S</option>
-                    </select>
-
-                </div>
         </div>
+
+        <div class="row mb-6">
+
+            <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_wheel_size_title', 1) }}</label>
+
+            <div class="col-lg-4 fv-row">
+                {!! Form::text('tyre_wheel_size', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.tyre_wheel_size', 1)]) !!}
+            </div>
+
+            <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.tyre_speed_rating_title', 1) }}</label>
+
+            <div class="col-lg-4 fv-row">
+                  {!! Form::text('tyre_speed_rating', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.tyre_speed_rating', 1)]) !!}
+            </div>
+
+        </div>
+
 
         <div class="row mb-6">
 
@@ -92,7 +105,6 @@
                     {!! Form::textarea('description', null, ['min' => 2, 'max' => 6, 'value' => 2, 'class' => 'form-control form-control-lg form-control-solid', 'placeholder' => trans_choice('content.description', 1)]) !!}
             </div>
 
-            
         </div>
 
     <!--end::Input group-->

@@ -964,7 +964,9 @@ return [
 
          'vehical_type'=>'vehical type',
          'tube_tyre'=>'tube tyre',
-         'tyre_size'=>'tyre size',
+         'tyre_width'=>'tyre width',
+         'tyre_wheel_size'=>'tyre wheel size',
+         'tyre_speed_rating'=>'tyre speed rating',
          'vehical_registration_no'=>'vehical registration no',
          'tyresize_image'=>'vehical image',
          'longitude'=>'longitude',
@@ -974,7 +976,9 @@ return [
         
          'vehical_type_title'=>'vehical type',
          'tube_tyre_title'=>'tube tyre',
-         'tyre_size_title'=>'tyre size',
+         'tyre_width_title'=>'tyre width',
+         'tyre_wheel_size_title'=>'tyre wheel size',
+         'tyre_speed_rating_title'=>'tyre speed rating',
          'vehical_registration_no_title'=>'vehical registration no',
          'tyresize_image_title'=>'tyre size image',
          'longitude_title'=>'longitude',
