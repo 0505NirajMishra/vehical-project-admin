@@ -47,7 +47,7 @@ class keyunlockservices
 
     public static function datatable()
     {
-        $data = DB::table('keyunlocks')->orderBy('created_at', 'desc')->get();
+        $data = DB::table('keyunlocks')->orderBy('created_at', 'asc')->get();
         return $data;
     }
 }

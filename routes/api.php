@@ -42,12 +42,12 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
 
         // get keyunlock
 
-        Route::post('getkeyunlock','getkeyunlock');
         Route::post('addkeyunlock','addkeyunlock');
-        
+        Route::post('getkeyunlockList','getkeyunlockList');
+
         // towing
 
-        Route::post('gettowing','gettowing');
+        Route::post('gettowingList','gettowingList');
         Route::post('addtowing','addtowing');
         
         // feedback 
@@ -80,13 +80,16 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
 
         // add flat tyre
         Route::post('addflattyre','addflattyre'); 
+        Route::post('getflattyrelist','getflattyrelist');
 
         // add flat battery
         Route::post('addflatbattery','addflatbattery'); 
+        Route::post('getFlatBatteryList','getFlatBatteryList');  
         
         // add petrol desiel
         Route::post('addpetroldesiel','addpetroldesiel'); 
-        
+        Route::post('getPetrolDesielList','getPetrolDesielList'); 
+
     });
 
 

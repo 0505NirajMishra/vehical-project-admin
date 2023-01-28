@@ -9,13 +9,11 @@ return new class extends Migration
  
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) 
+        {
             $table->id();
             $table->string('customer_name',150);
-            $table->string('company_name',150);
-            $table->string('vehical_name',150);
             $table->string('email',200);
-            $table->string('service_type',200);
             $table->string('customer_mobile',200);
             $table->string('password');
             $table->string('customer_cpassword');

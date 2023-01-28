@@ -19,11 +19,12 @@ return new class extends Migration
             $table->string('service_latitude');
             $table->string('description');
             $table->string('picanddroaddress');
+            $table->integer('user_id')->nullable();
+            $table->integer('service_id')->nullable();
             $table->timestamps();
         });
     }
 
- 
     public function down()
     {
         Schema::dropIfExists('towings');

@@ -59,20 +59,6 @@ class CAuthController extends Controller
     }
 
 
-    // post doctor 
-
-    public function adddoctor(DoctorRequest $request)
-    {
-        return $this->apiAuthService->adddoctor($request);
-    } 
-
-    // add hostel appoinment 
-
-    public function addhostelappoinment(HostelAppoinmentRequest $request)
-    {
-        return $this->apiAuthService->addhostelappoinment($request);
-    }
-
     // add services
 
     public function addservice(AddServiceRequest $request)
@@ -109,12 +95,43 @@ class CAuthController extends Controller
     }
 
     
-
     // get vehical type
 
     public function getaddvehical()
     {
         return $this->apiAuthService->getaddvehical();
+    }
+
+    // get flattyre List
+
+    public function getflattyrelist(){
+        return $this->apiAuthService->getflattyrelist();
+    }
+
+    // get flatbattery List
+
+    public function getFlatBatteryList(){
+        return $this->apiAuthService->getFlatBatteryList();
+    }
+
+    // get petrol desiel List
+
+    public function getPetrolDesielList(){
+        return $this->apiAuthService->getPetrolDesielList();
+    }
+
+    // get keyunlock List
+    
+    public function getkeyunlockList()
+    {
+        return $this->apiAuthService->getkeyunlockList();
+    }
+
+    // get towing List
+    
+    public function gettowingList()
+    {
+        return $this->apiAuthService->gettowingList();
     }
 
     // delete vehical 
@@ -145,8 +162,7 @@ class CAuthController extends Controller
         return $this->apiAuthService->addvehicaldetail($request);
     }
 
-
-    // get vehical type
+    // get employee
 
     public function getemployee()
     {
@@ -160,13 +176,7 @@ class CAuthController extends Controller
         return $this->apiAuthService->getservice();
     }
 
-    // get keyunlock 
-
-    public function getkeyunlock()
-    {
-        return $this->apiAuthService->getkeyunlock();
-    }
-
+    
     // add keyunlock
 
     public function addkeyunlock(KeyunlockRequest $request)
@@ -174,11 +184,7 @@ class CAuthController extends Controller
         return $this->apiAuthService->addkeyunlock($request);
     }
 
-    // get towing
-    public function gettowing()
-    {
-        return $this->apiAuthService->gettowing();
-    }
+    
 
     // add towing
     public function addtowing(TowingRequest $request)
@@ -227,19 +233,6 @@ class CAuthController extends Controller
         return $this->apiAuthService->addshopemployee($request);
     }
 
-    // get care 
-
-    public function getcare()
-    {
-        return $this->apiAuthService->getcare();
-    }
-
-    // add care 
-
-    public function addcare(CareRequest $request)
-    {
-        return $this->apiAuthService->addcare($request);
-    }
 
     // delete vehical 
     public function deleteemployee($id)
@@ -254,61 +247,7 @@ class CAuthController extends Controller
         return $this->apiAuthService->updateemployee($request,$id);
     }
 
-    // get hostel profile 
 
-    public function gethostelprofile()
-    {
-        return $this->apiAuthService->gethostelprofile();
-    }
-
-    // get hostel appoinment 
-
-    public function gethostelappoinment()
-    {
-        return $this->apiAuthService->gethostelappoinment();
-    }
-
-    // add doctor availbilty 
-
-    public function docavailbilty(DoctorAvaRequest $request)
-    {
-        return $this->apiAuthService->docavailbilty($request);
-    }
-
-    // delete doctor availbilty 
-
-    public function deletedocavailbilty($id)
-    {
-        return $this->apiAuthService->deletedocavailbilty($id);
-    } 
-
-    // update doctor availbilty 
-
-    public function updatedocavailbilty(Request $request,$id)
-    {
-        return $this->apiAuthService->updatedocavailbilty($request,$id);
-    }
-
-
-    //Get All Category 
-
-    public function get_category()
-    {
-        return $this->apiAuthService->get_category();
-    }
-
-    // get All Subcategory
-
-    public function get_subcategory()
-    {
-        return $this->apiAuthService->get_subcategory();
-    }
-
-    public function get_package(Request $request)
-    {
-        return $this->apiAuthService->get_package($request);   
-    }
- 
      /**
      * Logout user.
      *

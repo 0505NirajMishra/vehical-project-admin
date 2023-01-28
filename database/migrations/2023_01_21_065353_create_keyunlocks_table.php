@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('service_location');
             $table->string('service_longitude');
             $table->string('service_latitude');
+            $table->integer('user_id')->nullable();
+            $table->integer('service_id')->nullable();
             $table->string('description');
             $table->timestamps();
         });

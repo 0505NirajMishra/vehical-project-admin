@@ -4,15 +4,8 @@ namespace App\Services\Api;
 
 use App\Http\Requests\ApiLoginRequest;
 use App\Http\Requests\ApiRegisterRequest;
-use App\Http\Requests\Admin\ContactUsRequest;
-use App\Models\MasterOtp;
 use App\Models\User;
-
-use App\Models\TrainerAppslot;
-use App\Models\TrainerCapacity;
 use App\Models\VehicalCategory;
-use App\Models\Package;
-use App\Models\Category;
 use App\Models\VehicalEmployee;
 use App\Models\Feedback;
 use App\Models\CustomerDetail;
@@ -30,20 +23,11 @@ use App\Models\PetrolDesiel;
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Advisorie;
-use App\Models\SetAvailability;
 use App\Notifications\NewUserNotify;
 use App\Services\HelperService;
 use App\Services\UserService;
-
-use App\Services\PetDetailsService;
-use App\Services\ClinicService;
-
 use App\Services\RatingService;
 use App\Services\ReviewService;
-use App\Services\ContactUsService;
-use App\Services\SetAvailabilityService;
-use App\Services\BookAnAppointmentService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -58,12 +42,7 @@ use Illuminate\Support\Facades\DB;
 
 class AuthService
 {
-     /**
-     * Authenticate user Check and login.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
 
     public static function login(Request $request)
     {
@@ -155,9 +134,6 @@ class AuthService
                     'customer_name' => $request->customer_name,
                     'email' => $request->email,
                     'customer_mobile' => $request->customer_mobile,
-                    'company_name' => $request->company_name,
-                    'vehical_name' => $request->vehical_name,
-                    'service_type' => $request->service_type,
                     'password' => Hash::make($request->password),
                     'customer_cpassword' => Hash::make($request->customer_cpassword),
                     'user_type' => $request->user_type,
@@ -209,35 +185,6 @@ class AuthService
         }
     }
 
-
-    // get keyunlock 
-
-    public static function getkeyunlock(){
-           
-        $status = DB::table('keyunlocks')->get();
-    
-        if (count($status)>0) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $status
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    }
-
     // add keyunlock
 
     public static function addkeyunlock(Request $request){
@@ -286,32 +233,193 @@ class AuthService
                 }
     }  
 
-    // get towing 
+    // get flat Tyres List 
 
-    public static function gettowing(){
-           
-        $status = DB::table('towings')->get();
+    public static function getflattyrelist(){
+
+                    $users = DB::table('flattyres')
+                    ->select(
+                        'flattyres.*',
+                        'users.customer_name',
+                        'users.customer_mobile',
+                        'addservices.service_logo',
+                        )
+                     ->join('users','users.id','=','flattyres.user_id')
+                     ->join('addservices','addservices.service_id','=','flattyres.service_id')
+                     ->get();
+                        
+
+                     if(count($users)>0) 
+                     {
+                         return response()->json(
+                             [
+                                 'status' => true,
+                                 'message' => 'Data Find successfully',
+                                 'data' => $users
+                             ],
+                             200
+                         );
+                     } else {
+                         return response()->json(
+                             [
+                                 'status' => false,
+                                 'message' => 'Data not Found',
+                                 'data' =>[],
+                             ],
+                             200
+                         );
+                     }
+            
+    }
+
+    // get Flat Battery List
+
+    public static function getFlatBatteryList(){
+                  
+        $users = DB::table('flatbatterys')
+        ->select(
+            'flatbatterys.*',
+            'users.customer_name',
+            'users.customer_mobile',
+            'addservices.service_logo',
+            )
+         ->join('users','users.id','=','flatbatterys.user_id')
+         ->join('addservices','addservices.service_id','=','flatbatterys.service_id')
+         ->get();
+         
+
+
+         if(count($users)>0) 
+         {
+             return response()->json(
+                 [
+                     'status' => true,
+                     'message' => 'Data Find successfully',
+                     'data' => $users
+                 ],
+                 200
+             );
+         } else {
+             return response()->json(
+                 [
+                     'status' => false,
+                     'message' => 'Data not Found',
+                     'data' =>[],
+                 ],
+                 200
+             );
+         }
+    }
+
+    // get Petrol Desiel List
+
+    public static function getPetrolDesielList(){
+                  
+        $users = DB::table('petroldesiels')
+        ->select(
+            'petroldesiels.*',
+            'users.customer_name',
+            'users.customer_mobile',
+            'addservices.service_logo',
+            )
+         ->join('users','users.id','=','petroldesiels.user_id')
+         ->join('addservices','addservices.service_id','=','petroldesiels.service_id')
+         ->get();
+         
+         if(count($users)>0) 
+         {
+             return response()->json(
+                 [
+                     'status' => true,
+                     'message' => 'Data Find successfully',
+                     'data' => $users
+                 ],
+                 200
+             );
+         } else {
+             return response()->json(
+                 [
+                     'status' => false,
+                     'message' => 'Data not Found',
+                     'data' =>[],
+                 ],
+                 200
+             );
+         }
+    }
+
+    // get key unlock list 
+
+    public static function getkeyunlockList(){
+
+        $users = DB::table('keyunlocks')
+        ->select(
+            'keyunlocks.*',
+            'users.customer_name',
+            'users.customer_mobile',
+            'addservices.service_logo',
+            )
+         ->join('users','users.id','=','keyunlocks.user_id')
+         ->join('addservices','addservices.service_id','=','keyunlocks.service_id')
+         ->get();
+         
+         if(count($users)>0) 
+         {
+             return response()->json(
+                 [
+                     'status' => true,
+                     'message' => 'Data Find successfully',
+                     'data' => $users
+                 ],
+                 200
+             );
+         } else {
+             return response()->json(
+                 [
+                     'status' => false,
+                     'message' => 'Data not Found',
+                     'data' =>[],
+                 ],
+                 200
+             );
+         }
+    }
     
-        if(count($status)>0) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $status
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
+    // get towing List
+
+    public static function gettowingList(){
+
+        $users = DB::table('towings')
+        ->select(
+            'towings.*',
+            'users.customer_name',
+            'users.customer_mobile',
+            'addservices.service_logo',
+            )
+         ->join('users','users.id','=','towings.user_id')
+         ->join('addservices','addservices.service_id','=','towings.service_id')
+         ->get();
+         
+         if(count($users)>0) 
+         {
+             return response()->json(
+                 [
+                     'status' => true,
+                     'message' => 'Data Find successfully',
+                     'data' => $users
+                 ],
+                 200
+             );
+         } else {
+             return response()->json(
+                 [
+                     'status' => false,
+                     'message' => 'Data not Found',
+                     'data' =>[],
+                 ],
+                 200
+             );
+         }
     }
 
     // add towing
@@ -363,49 +471,6 @@ class AuthService
                 }
     }
 
-     // update doctor image record
-
-     public static function updatedoctorimage(Request $request,$id){ 
-
-        $input = 
-        [
-            'clinic_img' => $request->clinic_img,
-        ]; 
-
-        $image=$request->file('clinic_img');
-        
-        $filename = time().$image->getClientOriginalName();
-        
-        $destinationPath = public_path('/doctor/image/');
-        
-        $image->move($destinationPath, $filename);
-        
-        $input['clinic_img']=$filename;
-
-        $updatedata = DB::table('doctorclinicimages')->where('clinic_img_id',$id)->update($input);
-        
-        if ($updatedata) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Update successfully',
-                    'data' => $updatedata
-                ],
-                200
-                    );
-                 } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Updated',
-                    'data' =>[],
-                ],
-                200
-                );
-                }
-     } 
- 
     // add vehical type
 
     public static function addvehicalcategory(Request $request){
@@ -992,70 +1057,6 @@ class AuthService
         }
     }
 
-    // get care
-
-    public static function getcare(){
-           
-        $status = DB::table('cares')->get();
-    
-        if(count($status)>0) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $status
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    }
-
-    // add care 
-
-    public static function addcare(Request $request)
-    {       
-        $input = 
-        [
-            'servicetype' => $request->servicetype,
-            'tyre_type' => $request->tyre_type,
-            'vehical_type' => $request->vehical_type,
-        ]; 
-              
-        $doctor = care::create($input);
-
-        if($doctor) 
-        {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Insert successfully',
-                    'data' => $doctor
-                ],
-                200
-            );
-        } 
-        else {
-                return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Inserted',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    }
-
     // get vehical employee
 
     public static function getemployee(){
@@ -1225,147 +1226,7 @@ class AuthService
         }
     }
 
-    
-    //Api For Update User Notification Status 
-
-    public static function update_notification(Request $request)
-    {  
-
-    $validator=Validator::make($request->all(),[
-        'push_notification'=>'required',
-        ]);
-        if($validator->fails()){
-        return response()->json([
-            'message'=>'Validation fails',
-            'error'=>$validator->errors()
-        ],400);
-        }
-
-        $user=$request->user();
-    
-        $user->update([
-        'push_notification'=>$request->push_notification,
-        
-             ]);
-        return response()->json([
-            'message'=>'Data Update Successfully',
-        ],200);
-
-    }
-
-
-    //Api For Get catgeory
-
-    public static function get_category(){
-            $status = Category::get();
-            if (count($status)>0) {
-                return response()->json(
-                    [
-                        'status' => true,
-                        'message' => 'Data Find successfully',
-                        'data' => $status
-                    ],
-                    200
-                );
-            } else {
-                return response()->json(
-                    [
-                        'status' => false,
-                        'message' => 'Data not Found',
-                        'data' =>[],
-                    ],
-                    200
-                );
-            }
-    } 
-
-
-    // Api For Get Subcatgeory
-
-    public static function get_subcategory(){
-            $status = Subcatgeorys::get();
-            if (count($status)>0) {
-                return response()->json(
-                    [
-                        'status' => true,
-                        'message' => 'Data Find successfully',
-                        'data' => $status
-                    ],
-                    200
-                );
-            } else {
-                return response()->json(
-                    [
-                        'status' => false,
-                        'message' => 'Data not Found',
-                        'data' =>[],
-                    ],
-                    200
-                );
-            }
-    }
-
-
- 
-
-  
-
-    
-    //Api For Consultant Review
-    public static function consultant_review(Request $request){
-        
-        $users = DB::table('reviews')
-        ->join("users", "users.id", "=", "reviews.counsler_id")
-        ->where('reviews.counsler_id',$request->counsler_id)->get();
-        if (count($users)>0) {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $users
-                ],
-                200
-            );
-        } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-        }
-    }
-
-    //Api For Get Advisor By Counsilar Id
-    public static function  availablity_by_consultant(Request $request){
-        $result = Rating::where('consultant_id',$request->consultant_id)->get();
-         if (count($result)>0) {
-            return response()->json(
-                [
-                    'status' => true,
-                    'message' => 'Data Find successfully',
-                    'data' => $result
-                ],
-                200
-            );
-             } else {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Data not Found',
-                    'data' =>[],
-                ],
-                200
-            );
-            }
-    }
-
-    
-
-   
-
+    // user logout 
     
     public static function logout(Request $request)
     {
