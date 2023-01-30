@@ -1243,5 +1243,4 @@ class AuthService
         return JWTAuth::parseToken()->authenticate();
     }
 
-
 }
