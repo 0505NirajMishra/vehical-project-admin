@@ -19,6 +19,7 @@ use App\Models\Addservice;
 use App\Models\flattyre;
 use App\Models\flatBattery;
 use App\Models\PetrolDesiel;
+use App\Models\shopregistration;
 
 use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Hash;
@@ -717,13 +718,19 @@ class AuthService
 
         $input = 
         [
-            'vehical_detail' => $request->vehical_detail,
+            'vehical_photo' => $request->vehical_photo,
             'vehical_type' => $request->vehical_type,
             'vehical_company_name' => $request->vehical_company_name,
             'vehical_name' => $request->vehical_name,
             'vehical_registration_no' => $request->vehical_registration_no,
         ]; 
         
+        $image=$request->file('vehical_photo');
+        $filename = time().$image->getClientOriginalName();
+        $destinationPath = public_path('/vehicalcategory/image/');
+        $image->move($destinationPath, $filename);
+        $input['vehical_photo']=$filename;
+
         $doctor = VehicalDetail::create($input);
 
         if($doctor) 
@@ -1057,6 +1064,66 @@ class AuthService
         }
     }
 
+    // shop registration 
+
+    public static function shopregistration(Request $request){
+           
+        $input = 
+        [
+            'company_name' => $request->company_name,
+            'gst_no' => $request->gst_no,
+            'owner_name' => $request->owner_name,
+            'address' => $request->address,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'year_of_exper' => $request->year_of_exper,
+            'about_you' => $request->about_you,
+            'password' => $request->password,
+            'c_password' => $request->c_password,
+            'location' => $request->location,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+        ]; 
+        
+        $image=$request->file('work_place_photo');
+        $filename = time().$image->getClientOriginalName();
+        $destinationPath = public_path('/vehicalcategory/image/');
+        $image->move($destinationPath, $filename);
+        $input['work_place_photo']=$filename;
+
+        $image1=$request->file('profile_image');
+        $filename1 = time().$image1->getClientOriginalName();
+        $destinationPath1 = public_path('/vehicalcategory/image/');
+        $image1->move($destinationPath1, $filename1);
+        $input['profile_image']=$filename1;
+
+        $shopregistration = shopregistration::create($input);
+
+        if($shopregistration) 
+        {
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Data Insert successfully',
+                    'data' => $shopregistration
+                ],
+                200
+            );
+        } 
+        else {
+                return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Data not Inserted',
+                    'data' =>[],
+                ],
+                200
+            );
+        }
+
+    }
+
+
     // get vehical employee
 
     public static function getemployee(){
@@ -1242,5 +1309,5 @@ class AuthService
     {
         return JWTAuth::parseToken()->authenticate();
     }
-
+           
 }

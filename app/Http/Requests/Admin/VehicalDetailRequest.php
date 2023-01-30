@@ -18,19 +18,19 @@ class VehicalDetailRequest extends FormRequest
         {
             return 
             [
-                'vehical_detail' => 'required',
+                'vehical_photo' => 'required',
                 'vehical_type' => 'required',
                 'vehical_company_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
-                'vehical_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
+                'vehical_name' => 'required',
                 'vehical_registration_no' => 'required|alpha_num',
             ];
         } else {
             return 
             [
-                'vehical_detail' => 'required',
+                'vehical_photo' => 'required',
                 'vehical_type' => 'required',
                 'vehical_company_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
-                'vehical_name' => 'required|string|regex:/^[a-zA-Z]+$/u|max:255',
+                'vehical_name' => 'required',
                 'vehical_registration_no' => 'required|alpha_num',
             ];
         }
@@ -40,7 +40,7 @@ class VehicalDetailRequest extends FormRequest
     {
         return 
         [
-            'vehical_detail.required' => __('validation.required', ['attribute' => 'Vehical detail']),
+            'vehical_photo.required' => __('validation.required', ['attribute' => 'Vehical photo']),
             'vehical_type.required' => __('validation.required', ['attribute' => 'Vehical type']),
             'vehical_company_name.required' => __('validation.required', ['attribute' => 'Vehical company name']),
             'vehical_name.required' => __('validation.required', ['attribute' => 'Vehical name']),

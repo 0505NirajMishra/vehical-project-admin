@@ -15,7 +15,7 @@ class VehicalDetail extends Model
 
     protected $fillable = 
     [
-       'vehical_detail',
+       'vehical_photo',
        'vehical_type',
        'vehical_company_name',
        'vehical_name',

@@ -9,8 +9,8 @@
 
   <tr>
     <th>ID No.</th>
-    <th>vehical detail</th>
     <th>vehical type</th>
+    <th>vehical photo</th>
     <th>vehical company name</th>
     <th>vehical name</th>
     <th>vehical registration no</th>
@@ -22,8 +22,8 @@
   <tr>
 
     <td>{{ $user->vehicaladddetail_id }}</td>
-    <td>{{ $user->vehical_detail }}</td>
     <td>{{ $user->vehical_type }}</td>
+    <td><img src="{{ url('/') }}/vehicalcategory/image/{{$user->vehical_photo}}" style="width:50px; height:50px;" /></td>
     <td>{{ $user->vehical_company_name }}</td>
     <td>{{ $user->vehical_name }}</td>
     <td>{{ $user->vehical_registration_no }}</td>

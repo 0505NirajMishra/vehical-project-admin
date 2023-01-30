@@ -11,10 +11,10 @@ return new class extends Migration
     {
         Schema::create('vehicaladddetails', function (Blueprint $table) {
             $table->increments('vehicaladddetail_id');
-            $table->string('vehical_detail');
             $table->string('vehical_type');
             $table->string('vehical_company_name');
             $table->string('vehical_name');
+            $table->string('vehical_photo');
             $table->string('vehical_registration_no');
             $table->timestamps();
         });

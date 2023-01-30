@@ -65,10 +65,9 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
         Route::post('getshopemployee','getshopemployee');
         Route::post('addshopemployee','addshopemployee');
 
-        // care
+        // shop registration
+        Route::post('shopregistration','shopregistration');
 
-        Route::post('getcare','getcare');
-        Route::post('addcare','addcare');
         
         // add vehical detail
 
@@ -89,6 +88,7 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
         // add petrol desiel
         Route::post('addpetroldesiel','addpetroldesiel'); 
         Route::post('getPetrolDesielList','getPetrolDesielList'); 
+
 
     });
 

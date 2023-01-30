@@ -426,17 +426,17 @@ return [
 
         // vehical detail 
 
-        'vehical_detail'=>'vehical detail',
         'vehical_type'=>'vehical type',
         'vehical_company_name'=>'vehical compnay name',
         'vehical_name'=>'vehical name',
         'vehical_registration_no' => 'vehical registration no',
+        'vehical_photo' => 'vehical photo',
 
-        'vehical_detail_title'=>'vehical detail',
         'vehical_type_title'=>'vehical type',
         'vehical_company_name_title'=>'vehical compnay name',
         'vehical_name_title'=>'vehical name',
         'vehical_registration_no_title' => 'vehical registration no',
+        'vehical_photo_title' => 'vehical photo',
 
         'vehicaldetail'=>'vehical detail', 
 
@@ -455,6 +455,41 @@ return [
         'vehical_mobile_title'=>'vehical mobile',
 
         'vehicalemployee'=>'vehical employee', 
+
+        // shop registration 
+
+        'company_name'=>'company name',
+        'gst_no'=>'Gst no',
+        'owner_name'=>'Owner name',
+        'address'=>'Address',
+        'email'=>'Email',
+        'mobile'=>'Mobile',
+        'year_of_exper'=>'Year of experience',
+        'about_you'=>'About You',
+        'password'=>'Password',
+        'c_password'=>'Confirm Password',
+        'work_place_photo'=>'Work place photo',
+        'location'=>'Location',
+        'longitude'=>'Longitude',
+        'latitude'=>'Latitude',
+
+        'company_name_title'=>'company name',
+        'gst_no_title'=>'Gst no',
+        'owner_name_title'=>'Owner name',
+        'address_title'=>'Address',
+        'email_title'=>'Email',
+        'mobile_title'=>'Mobile',
+        'year_of_exper_title'=>'Year of experience',
+        'about_you_title'=>'About You',
+        'password_title'=>'Password',
+        'c_password_title'=>'Confirm Password',
+        'work_place_photo_title'=>'Work place photo',
+        'profile_image_title'=>'profile image',
+        'location_title'=>'Location',
+        'longitude_title'=>'Longitude',
+        'latitude_title'=>'Latitude',
+
+        'shopregistration'=>'shop registration', 
 
         // start hostel appoinment 
 

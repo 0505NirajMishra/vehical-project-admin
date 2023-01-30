@@ -130,6 +130,9 @@ Breadcrumbs::resource('flatbatterys', $mls->messageLanguage('only_name', 'flatba
 /*------------- Admin vehical flattyre ------------------------*/
 Breadcrumbs::resource('flattyres', $mls->messageLanguage('only_name', 'flattyre', 2));
 
+/*------------- Admin shop registration ------------------------*/
+Breadcrumbs::resource('shopregistrations', $mls->messageLanguage('only_name', 'shopregistration', 2));
+
 /*------------- Admin add service ------------------------*/
 Breadcrumbs::resource('addservices', $mls->messageLanguage('only_name', 'addservice', 2));
 

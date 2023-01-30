@@ -72,6 +72,13 @@ class VehicaldetailController extends Controller
     public function store(VehicalDetailRequest $request)
     {
         $input = $request->except(['_token', 'proengsoft_jsvalidation']);
+
+        $image = $request->file('vehical_photo');
+        $filename = time() . $image->getClientOriginalName();
+        $destinationPath = public_path('/vehicalcategory/image/');
+        $image->move($destinationPath, $filename);
+        $input['vehical_photo'] = $filename;
+
         $battle = $this->vehicaldetail->create($input);
         return redirect()->route($this->index_route_name)->with('success',
         $this->mls->messageLanguage('created', 'vehical add detail', 1));
@@ -92,9 +99,24 @@ class VehicaldetailController extends Controller
     {
         $input = $request->except(['_method', '_token', 'proengsoft_jsvalidation']);
         
-        $this->vehicaldetail->update($input, $addvehicaldetail);
+        if (!empty($input['vehical_photo'])) 
+        {
+            $image = $request->file('vehical_photo');
+            $filename = time() . $image->getClientOriginalName();
+            $destinationPath = public_path('/vehicalcategory/image/');
+            $image->move($destinationPath, $filename);
+            $input['vehical_photo'] = $filename;
 
-        return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('updated', 'vehical update', 1));
+            $this->vehicaldetail->update($input, $addvehicaldetail);
+            return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('updated', 'vehical update', 1));
+        
+        } else {
+
+            $this->vehicaldetail->update($input, $addvehicaldetail);
+            return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('updated', 'vehical update', 1));
+        
+        }
+
     }
 
     public function destroy($id)

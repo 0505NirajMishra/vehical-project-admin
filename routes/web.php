@@ -249,6 +249,15 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
         });
         Route::resource('/flattyres',flattyreController::class);
 
+        // shop registration 
+
+        Route::controller(ShopregistrationController::class)->group(function () {
+            Route::get('/shopregistrations/status/{id}/{status}','status')->name('shopregistrations.status');
+            Route::get('/shopregistrations/destroy/{id}/','destroy')->name('shopregistrations.destroy');
+        });
+        Route::resource('/shopregistrations',ShopregistrationController::class);
+
+
         //Setting manager
         Route::controller(SettingController::class)->group(function () {
             Route::get('/settings/general', 'edit_general')->name('settings.edit_general');

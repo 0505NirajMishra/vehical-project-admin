@@ -21,6 +21,7 @@ use App\Http\Requests\Admin\VehicalDetailRequest;
 use App\Http\Requests\Admin\flattyreRequest;
 use App\Http\Requests\Admin\flatBatteryRequest;
 use App\Http\Requests\Admin\PetroldesielRequest;
+use App\Http\Requests\Admin\ShopRegistrationRequest;
 
 use App\Http\Requests\ApiChangePasswordRequest;
 use App\Http\Requests\ApiConsultantRequest;
@@ -153,6 +154,13 @@ class CAuthController extends Controller
     public function addemployee(VehicalEmployeeRequest $request)
     {
         return $this->apiAuthService->addemployee($request);
+    }
+
+    // shop registration detail
+
+    public function shopregistration(ShopRegistrationRequest $request)
+    {
+        return $this->apiAuthService->shopregistration($request);
     }
 
     // vehical add detail
