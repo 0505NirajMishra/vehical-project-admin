@@ -44,6 +44,7 @@ use Illuminate\Support\Facades\DB;
 class AuthService
 {
     
+    // login
 
     public static function login(Request $request)
     {
@@ -112,6 +113,7 @@ class AuthService
         }
     }
 
+    // registration
 
     public static function register(Request $request)
     {
@@ -1123,7 +1125,6 @@ class AuthService
 
     }
 
-
     // get vehical employee
 
     public static function getemployee(){
@@ -1305,9 +1306,12 @@ class AuthService
         ]);
     }
 
+    // get auth user
+
     public static function getAuthUser()
     {
         return JWTAuth::parseToken()->authenticate();
     }
-           
+       
+    
 }

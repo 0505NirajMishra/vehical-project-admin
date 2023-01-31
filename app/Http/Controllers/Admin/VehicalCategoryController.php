@@ -11,6 +11,8 @@ use App\Services\UtilityService;
 use App\Services\vehicalcategoryservice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Services\FileService;
+use Illuminate\Support\Facades\Image;
 
 class VehicalCategoryController extends Controller
 {
@@ -66,17 +68,37 @@ class VehicalCategoryController extends Controller
 
     public function store(VehicalCategoryRequest $request)
     {
-        $input = $request->except(['_token', 'proengsoft_jsvalidation']);
+        $input = $request->except(['_token', 'proengsoft_jsvalidation']);      
 
-        $image = $request->file('vehical_logo');
-        $filename = time() . $image->getClientOriginalName();
-        $destinationPath = public_path('/vehicalcategory/image/');
-        $image->move($destinationPath, $filename);
-        $input['vehical_logo'] = $filename;
+        // $logo=FileService::multipleImageUploader($request,'vehical_logo','newvehicalfolder/image/');
+        // $input['vehical_logo']= json_encode($logo);    
 
+        // if($request->vehical_logo)
+        // {
+        //          foreach($request->file('vehical_logo') as $image)
+        //          {
+        //                  $name=$image->getClientOriginalName();
+        //                  $image->move(public_path().'/image/',$name);
+        //                  $data[] = $name;
+        //          }
+        // }
+        
+        // $input['vehical_logo'] = json_encode($data);
+
+        $vehical_logo=[];
+
+        foreach ($request->vehical_logo as $image) {
+            $image_name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image_path = 'uploads/' . $image_name;
+            Image::make($image)->save(public_path($image_path));
+            array_push($vehical_logo, $image_path);
+        }
+        $input['vehical_logo'] = $vehical_logo;
+        
         $battle = $this->vehicategory->create($input);
         return redirect()->route($this->index_route_name)->with('success',
         $this->mls->messageLanguage('created', 'vehical category', 1));
+        
     }
 
     public function show(VehicalCategory $vehicaltype)

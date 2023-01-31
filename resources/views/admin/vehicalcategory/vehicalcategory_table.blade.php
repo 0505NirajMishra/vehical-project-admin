@@ -6,7 +6,7 @@
 </html>
 
 <table class="table align-middle table-row-dashed fs-6 gy-5">
-
+  
   <tr>
     <th>ID No.</th>
     <th>vehical type name</th>
@@ -18,13 +18,13 @@
   @foreach($vehicalcategory as $user)
   
   <tr>
-
+  
     <td>{{ $user->vehical_catgeory_id }}</td>
     <td>{{ $user->vehical_name }}</td>
-    <td>{{ $user->vehical_type }}</td>
+    <td>{{ $user->vehical_type }}</td>  
     
-    <td><img src="{{ url('/') }}/vehicalcategory/image/{{$user->vehical_logo}}" style="width:50px; height:50px;" /></td>
-  
+    
+    
     <td>
         <a href="{{ url('/') }}/admin/vehicaltypes/{{$user->vehical_catgeory_id}}/edit" title="Edit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" >
                     <span class="svg-icon svg-icon-3">
@@ -37,7 +37,8 @@
                     </span>
         </a>  
     </td>
-    
+  
   </tr>
+
   @endforeach
 </table>

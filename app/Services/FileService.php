@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Services;
+use App\Services\Config;
+
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -140,39 +142,40 @@ class FileService
      */
     public static function imageUploader(Request $request, $key, $url, $name = '')
     {
-        $filesystem_disk = config()->get('services.env.filesystem_disk');
+         $filesystem_disk = env('FILESYSTEM_DISK');
         $image_name = "";
         if ($request->hasFile($key)) {
             $image = $request->file($key);
-          
             $ext = $image->getClientOriginalExtension() !== "" ? $image->getClientOriginalExtension() : $image->extension();
-            
-
             if ($name) {
                 $image_name = $name;
             } else {
-                $image_name = $name . time() . '_' . uniqid() . '.' . $ext;
+                $image_name = time() . '_' . uniqid() . '.' . $ext;
             }
-            // dd($url, $image, $image_name, 'public');
             if (request()->is('*api/*')) {
-                try {
-                    
-                    $path=$image->storeAs('uploads/', $image_name, 'azure');
-                    
-                    return $path;
+            try {
+                if($filesystem_disk!='s3'){
+                    $image->storeAs($url, $image_name, 'public');                
+                }else{
+                    // dd($url.$image_name);
+                    Storage::disk($filesystem_disk)->put($url.$image_name, file_get_contents($image));
+                    // dd(getS3Image($url,$image_name));
+                    // Storage::temporaryUrl($url.$image_name,now()->addMinutes(5));
+                
+                }
+                    return $url.$image_name;
                 } catch (Exception $e) {
-                    // Log::error('Image not uploaded. Request is'. $request->all(), 'Error: - '. $e);
+                    Log::error('Image not uploaded. Request is Error: - '. $e);
                     return null;
                 }
             } else {
                 try {
-                    // Storage::disk($filesystem_disk)->putFileAs('public/' . $url, $image, $image_name, 'public');
-                    // return $image_name;
-                   
-                    // $path=$request->file($image)->storeAs('uploads/' . $url, $image, $image_name, 'azure');
-                   
-                    $path=$image->storeAs('uploads/' . $url, $image, $image_name, 'azure');
-                    return $path;
+                    if($filesystem_disk!='s3'){
+                        $image->storeAs($url, $image_name, 'public');                
+                    }else{
+                        Storage::disk($filesystem_disk)->put($url.$image_name, $image);
+                }
+                    return $url.$image_name;
                 } catch (Exception $e) {
                     // Log::error('Image not uploaded. Request is' . $request->all(), 'Error: - ' . $e);
                     return null;
@@ -183,6 +186,27 @@ class FileService
         }
     }
 
+    public static function image_path($url){
+    $filesystem_disk = env('FILESYSTEM_DISK');
+    if($filesystem_disk!='s3'){
+      return  $url;                
+    }
+    return Storage::temporaryUrl($url,now()->addMinutes(5));
+    }
+
+    public static function multi_image_path(array $url){
+        $filesystem_disk = env('FILESYSTEM_DISK');
+        
+            if($filesystem_disk!='s3'){
+            return  $url;                
+         }
+         foreach($url as $ur){
+         return Storage::temporaryUrl($url,now()->addMinutes(5));
+        }
+        
+        
+       
+        }
 
     /**
      * Upload Multiple file in storage.
@@ -193,62 +217,43 @@ class FileService
      * @param  String  $name
      * @return array
      */
+    
+    
     public static function multipleImageUploader(Request $request, $key, $url, $name = '')
     {
-        $filesystem_disk = config()->get('services.env.filesystem_disk');
+        $filesystem_disk = env('FILESYSTEM_DISK');
         $image_name = [];
-        // dd($request->all(), $request->hasFile($key), $request->file($key));
-        if ($request->hasFile($key)) {
-            foreach ($request->file($key) as $image) {
-                // $image = $request->file($key);
-                $ext = $image->getClientOriginalExtension() !== "" ? $image->getClientOriginalExtension() : $image->extension();
 
+        if ($request->hasFile($key)) 
+        {    
+            foreach ($request->file($key) as $image) 
+            {
+                $ext = $image->getClientOriginalExtension() !== "" ? $image->getClientOriginalExtension() : $image->extension();
+                
                 if ($name) {
                     $image_name_str = $name;
                 } else {
-                    $image_name_str = $name . time() . '_' . uniqid() . '.' . $ext;
+                    $image_name_str = time() . '_' . uniqid() . '.' . $ext;
+                }         
+                
+                if($filesystem_disk!='s3'){
+                    $image->storeAs($url, $image_name_str, 'public');
+                 }else{
+                   Storage::disk($filesystem_disk)->put($url.$image_name_str, file_get_contents($image)); 
                 }
-                // $path = Storage::disk($filesystem_disk)->putFileAs('public/' . $url, $image, $image_name_str, 'public');
-                // $path = Storage::disk($filesystem_disk)->storeAs('uploads/' . $url, $image, $image_name_str, 'azure');
-                // $path=$request->file($image)->storeAs('uploads/', $image_name_str, 'azure');
-                $path=$image->storeAs('uploads/', $image_name_str, 'azure');
-                array_push($image_name, $image_name_str);
+
+                array_push($image_name, $url.$image_name_str);
             }
             return $image_name;
         } else {
             return [];
         }
+    
     }
-
-    //New Method
-    public function handle(Request $uploadedFile, $path = 'uploads', $assignNewName = true, $fileSystem = 'custom')
-    {
-        if ( $assignNewName ) {
-            $extension = $uploadedFile->getClientOriginalExtension();
-            $fileName  = sprintf('%s.%s', strtotime(now()), $extension);
-        } else {
-            $fileName = $uploadedFile->getClientOriginalName();
-        }
-        try {
-            $uploadedFile->storeAs(
-                $path,
-                $fileName,
-                $fileSystem
-            );
-
-            return $fileName;
-
-        } catch ( \Exception $e ) {
-            throw new \Exception($e);
-        }
-    }
-
-
-
 
     public static function removeImage(Model $model, String $column_name, $url)
     {
-        $filesystem_disk = config()->get('services.env.filesystem_disk');
+        $filesystem_disk = env('FILESYSTEM_DISK');
         if ($model->getOriginal($column_name) != "" && $model->getOriginal($column_name) != null) {
             if (Storage::disk($filesystem_disk)->exists('public/' . $url . '/' . $model->getRawOriginal($column_name))) {
 
@@ -265,19 +270,24 @@ class FileService
 
     public static function fileUploaderWithoutRequest(UploadedFile $image, $url, $name = '')
     {
-        $filesystem_disk = config()->get('services.env.filesystem_disk');
+        $filesystem_disk = env('FILESYSTEM_DISK');
+        
         $ext = $image->getClientOriginalExtension() !== "" ? $image->getClientOriginalExtension() : $image->extension();
 
         if ($name) {
             $image_name = $name;
         } else {
-            $image_name = $name . time() . '_' . uniqid() . '.' . $ext;
+            $image_name = time() . '_' . uniqid() . '.' . $ext;
         }
-        try {
-            $path = Storage::disk($filesystem_disk)->putFileAs('public/' . $url, $image, $image_name, 'public');
-            return $image_name;
+        try { 
+            if($filesystem_disk!='s3'){
+                $image->storeAs($url, $image_name, 'public');                
+            }else{  
+                Storage::disk($filesystem_disk)->put($url.$image_name, file_get_contents($image));
+            }
+            return $url.$image_name;
         } catch (Exception $e) {
-            // Log::error('Image not uploaded. Request is' . request()->all(), 'Error: - ' . $e);
+            Log::error('Image not uploaded. Request is' . request()->all(), 'Error: - ' . $e);
             return null;
         }
     }
