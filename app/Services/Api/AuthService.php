@@ -233,7 +233,7 @@ class AuthService
                 ],
                 200
                 );
-                }
+        }
     }  
 
     // get flat Tyres List 
@@ -273,6 +273,48 @@ class AuthService
                          );
                      }
             
+    }
+
+    // user list using flatbattery table 
+
+
+    public static function changeuserstatus()
+    {
+
+        $users = DB::table('users')
+        ->select(
+            'users.*',
+            'users.customer_name',
+            'users.email',
+            'users.customer_mobile',
+            'users.status',
+            'users.user_type',
+            )
+         ->join('flatbatterys','users.id','=','flatbatterys.user_id')
+         ->first();
+            
+
+         if($users) 
+         {
+             return response()->json(
+                 [
+                     'status' => true,
+                     'message' => 'Data Find successfully',
+                     'data' => $users
+                 ],
+                 200
+             );
+         } else {
+             return response()->json(
+                 [
+                     'status' => false,
+                     'message' => 'Data not Found',
+                     'data' =>[],
+                 ],
+                 200
+             );
+         }
+
     }
 
     // get Flat Battery List

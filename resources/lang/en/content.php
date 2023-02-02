@@ -911,6 +911,7 @@ return [
         'service_latitude'=>'service latitude',
         'description'=>'description',
         'picanddroaddress'=>'pick up and drop address',
+        'status'=>'status',
 
         'vehical_type_title'=>'vehical type',
         'vehical_photo_title'=>'vehical photo',
@@ -920,6 +921,7 @@ return [
         'service_latitude_title'=>'service latitude',
         'description_title'=>'description',
         'picanddroaddress_title'=>'pick up and drop address',
+        'status_title'=>'status title',
         
         'towing' => 'towing',
 
@@ -932,7 +934,8 @@ return [
         'service_longitude'=>'service longitute',
         'service_latitude'=>'service latitude',
         'description'=>'description',
-       
+        'status'=>'status',
+
         'vehical_type_title'=>'vehical type',
         'vehical_photo_title'=>'vehical photo',
         'vehical_registration_no_title'=>'vehical registration no',
@@ -940,7 +943,8 @@ return [
         'service_longitude_title'=>'service longitute',
         'service_latitude_title'=>'service latitude',
         'description_title'=>'description',
-      
+        'status_title'=>'status',
+
         'keyunlock' => 'keyunlock',
 
         // add service 

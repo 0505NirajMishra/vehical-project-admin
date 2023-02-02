@@ -1,7 +1,7 @@
 <html>
         <head>
                <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-               <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> 
+               <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
         </head>
 </html>
 
@@ -17,11 +17,12 @@
     <th>longitute</th>
     <th>latitute</th>
     <th>description</th>
+    <th>status</th>
     <th>ACTION</th>
   </tr>
 
   @foreach($flat as $user)
-  
+
   <tr>
 
     <td>{{$user->flatbattery_id }}</td>
@@ -34,6 +35,21 @@
     <td>{{$user->latitude}}</td>
     <td>{{$user->description}}</td>
     <td>
+        <a href="{{ url('/') }}/admin/flatbatterys/active/{{$user->flatbattery_id}}/{{$user->status==0?1:($user->status==1?2:0)}}" data-id="`+ flatbattery_id +`" title="Status" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+          <span class="svg-icon svg-icon-3">
+              <?php if ($user->status == 0): ?>
+                    <button type="button" class="btn btn-warning">Pending</button>
+              <?php elseif ($user->status == 1): ?>
+                    <button type="button" class="btn btn-success">Accept</button>
+              <?php elseif ($user->status == 2): ?>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+              <?php else: ?>
+                    <span>No Status Found</span>
+              <?php endif;?>
+          </span>
+        </a>
+    </td>
+    <td>
         <a href="{{ url('/') }}/admin/flatbatterys/{{$user->flatbattery_id}}/edit" title="Edit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" >
                     <span class="svg-icon svg-icon-3">
                         <i class="fa fa-pen"></i>
@@ -43,7 +59,7 @@
                     <span class="svg-icon svg-icon-3">
                         <i class="fa fa-trash"></i>
                     </span>
-        </a>  
+        </a>
     </td>
   </tr>
   @endforeach

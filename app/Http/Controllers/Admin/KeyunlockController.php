@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\KeyunlockRequest;
 use App\Models\Keyunlock;
-use App\Models\Addservice;
+use App\Models\User;
 use App\Models\VehicalCategory;
-use App\Services\keyunlockservices;
-
 use App\Services\CustomerService;
+use App\Services\keyunlockservices;
 use App\Services\ManagerLanguageService;
 use App\Services\UtilityService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -63,14 +63,14 @@ class KeyunlockController extends Controller
     }
 
     public function create()
-    {   
-        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);     
-        return view($this->create_view,$data);
+    {
+        $data['vehicalcategorys'] = VehicalCategory::get(["vehical_type", "vehical_catgeory_id"]);
+        return view($this->create_view, $data);
     }
 
     public function store(KeyunlockRequest $request)
     {
-        $input = $request->except(['_token', 'proengsoft_jsvalidation']); 
+        $input = $request->except(['_token', 'proengsoft_jsvalidation']);
 
         $image = $request->file('vehical_photo');
         $filename = time() . $image->getClientOriginalName();
@@ -79,7 +79,7 @@ class KeyunlockController extends Controller
         $input['vehical_photo'] = $filename;
 
         $battle = $this->keyunlock->create($input);
-        return redirect()->route($this->index_route_name)->with('success',$this->mls->messageLanguage('created', 'Keyunlock', 1));
+        return redirect()->route($this->index_route_name)->with('success', $this->mls->messageLanguage('created', 'Keyunlock', 1));
     }
 
     public function show(Keyunlock $keyunlock)
@@ -89,11 +89,11 @@ class KeyunlockController extends Controller
 
     public function edit(Keyunlock $keyunlock)
     {
-        $data = VehicalCategory::get(["vehical_type","vehical_catgeory_id"]);     
-        return view($this->edit_view, compact('keyunlock','data'));
+        $data = VehicalCategory::get(["vehical_type", "vehical_catgeory_id"]);
+        return view($this->edit_view, compact('keyunlock', 'data'));
     }
 
-    public function update(KeyunlockRequest $request,Keyunlock $keyunlock)
+    public function update(KeyunlockRequest $request, Keyunlock $keyunlock)
     {
         $input = $request->except(['_method', '_token', 'proengsoft_jsvalidation']);
 
@@ -105,13 +105,12 @@ class KeyunlockController extends Controller
 
         $this->keyunlock->update($input, $keyunlock);
         return redirect()->route($this->index_route_name)->with('success',
-        $this->mls->messageLanguage('updated', 'update keyunlock', 1));
+            $this->mls->messageLanguage('updated', 'update keyunlock', 1));
     }
 
     public function destroy($id)
     {
         $result = DB::table('keyunlocks')->where('keyunlocks_id', $id)->delete();
-
         return redirect()->back()->withSuccess('Data Delete Successfully!');
 
         if ($result) {
@@ -132,4 +131,16 @@ class KeyunlockController extends Controller
 
     }
 
+    public function active($id, $status)
+    {
+        $update=array('status' => $status);
+        $result = keyunlockservices::status($update,$id);
+
+        $storedata = Keyunlock::where('keyunlocks_id',$id)->first();             
+        $user = User::where('id',$storedata->user_id)->first();
+        $result = UserService::status($update,$storedata->user_id);
+        
+        return redirect()->back()->withSuccess('Status Update Successfully!');
+    }
+    
 }

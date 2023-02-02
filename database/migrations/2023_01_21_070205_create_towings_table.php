@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('service_latitude');
             $table->string('description');
             $table->string('picanddroaddress');
+            $table->tinyInteger('status')->default(0)->comment('0:pending,1:accept,2:cancel');
             $table->integer('user_id')->nullable();
             $table->integer('service_id')->nullable();
             $table->timestamps();

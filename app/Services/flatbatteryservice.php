@@ -49,5 +49,11 @@ class flatbatteryservice
         $data = DB::table('flatbatterys')->orderBy('created_at', 'asc')->get();
         return $data;
     }
+
+    public static function status(array $data, $id)
+    {
+        $data = flatBattery::where('flatbattery_id', $id)->update($data);
+        return $data;
+    }
     
 }

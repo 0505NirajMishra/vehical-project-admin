@@ -198,14 +198,16 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
         Route::controller(KeyunlockController::class)->group(function () {
             Route::get('/keyunlocks/status/{id}/{status}','status')->name('keyunlocks.status');
             Route::get('/keyunlocks/destroy/{id}/','destroy')->name('keyunlocks.destroy');
+            Route::get('/keyunlocks/active/{id}/{active}','active')->name('keyunlocks.active');
         });
         Route::resource('/keyunlocks',KeyunlockController::class);
 
-        // twing
+        // towing
 
         Route::controller(towingController::class)->group(function () {
             Route::get('/towings/status/{id}/{status}','status')->name('towings.status');
             Route::get('/towings/destroy/{id}/','destroy')->name('towings.destroy');
+            Route::get('/towings/active/{id}/{active}','active')->name('towings.active');
         });
         Route::resource('/towings',towingController::class);
 
@@ -230,6 +232,7 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
         Route::controller(PetroldesielController::class)->group(function () {
             Route::get('/petroldesials/status/{id}/{status}','status')->name('petroldesials.status');
             Route::get('/petroldesials/destroy/{id}/','destroy')->name('petroldesials.destroy');
+            Route::get('/petroldesials/active/{id}/{active}','active')->name('petroldesials.active');
         });
         Route::resource('/petroldesials',PetroldesielController::class);
 
@@ -238,6 +241,7 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
         Route::controller(flatbatteryController::class)->group(function () {
             Route::get('/flatbatterys/status/{id}/{status}','status')->name('flatbatterys.status');
             Route::get('/flatbatterys/destroy/{id}/','destroy')->name('flatbatterys.destroy');
+            Route::get('/flatbatterys/active/{id}/{active}','active')->name('flatbatterys.active');
         });
         Route::resource('/flatbatterys',flatbatteryController::class);
 
@@ -246,6 +250,7 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => 'admin', 'as' => '
         Route::controller(flattyreController::class)->group(function () {
             Route::get('/flattyres/status/{id}/{status}','status')->name('flattyres.status');
             Route::get('/flattyres/destroy/{id}/','destroy')->name('flattyres.destroy');
+            Route::get('/flattyres/active/{id}/{active}','active')->name('flattyres.active');
         });
         Route::resource('/flattyres',flattyreController::class);
 

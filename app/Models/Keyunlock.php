@@ -22,5 +22,6 @@ class Keyunlock extends Model
        'service_longitude',
        'service_latitude',
        'description',
+       'status'
     ];
 }

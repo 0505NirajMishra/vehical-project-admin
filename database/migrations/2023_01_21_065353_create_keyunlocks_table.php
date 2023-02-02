@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('service_latitude');
             $table->integer('user_id')->nullable();
             $table->integer('service_id')->nullable();
+            $table->tinyInteger('status')->default(0)->comment('0:pending,1:accept,2:cancel');
             $table->string('description');
             $table->timestamps();
         });

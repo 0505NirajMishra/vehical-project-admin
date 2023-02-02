@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PetroldesielRequest;
 use App\Models\PetrolDesiel;
+use App\Models\User;
+
 use App\Models\VehicalCategory;
 use App\Models\Addservice;
 use App\Services\petroldesielservices;
-
 use App\Services\CustomerService;
 use App\Services\ManagerLanguageService;
 use App\Services\UtilityService;
+
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -142,6 +145,18 @@ class PetroldesielController extends Controller
             ]);
         }
 
+    }
+
+    public function active($id, $status)
+    {
+        $update=array('status' => $status);
+        $result = petroldesielservices::status($update,$id);
+
+        $storedata = PetrolDesiel::where('petrol_id',$id)->first();             
+        $user = User::where('id',$storedata->user_id)->first();
+        $result = UserService::status($update,$storedata->user_id);
+        
+        return redirect()->back()->withSuccess('Status Update Successfully!');
     }
 
 }

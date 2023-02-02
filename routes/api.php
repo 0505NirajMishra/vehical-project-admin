@@ -25,6 +25,10 @@ Route::group(['middleware' => ['optimizeImages'], 'prefix' => '/v1/customer', 'n
         
         Route::post('login', 'login');
         Route::post('register', 'register');
+
+        // user status 
+
+        Route::post('changeuserstatus','changeuserstatus');
         
         // vehcial category type 
 

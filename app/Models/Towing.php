@@ -22,6 +22,7 @@ class Towing extends Model
        'service_longitude',
        'service_latitude',
        'description',
-       'picanddroaddress'
+       'picanddroaddress',
+       'status'
     ];
 }

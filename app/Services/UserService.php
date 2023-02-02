@@ -141,18 +141,16 @@ class UserService
         $data = User::where('id', $id)->update($data);
         return $data;
     }
-    // public static function phoneapprove(array $data, $id)
-    // {
-    //     $data = User::where('id', $id)->update($data);
-    //     return $data;
-    // }
-    /**
+    
+     
+     /**
      * update Last Login details.
      *
      * @param int $id
      * @param Request $request = null
      * @return bool
      */
+
     public static function updateLastLogin($id, $request = null)
     {
         $input = [
@@ -248,4 +246,9 @@ class UserService
         $result = $user->delete();
         return $result;
     }
+
+
+   
+     
+
 }

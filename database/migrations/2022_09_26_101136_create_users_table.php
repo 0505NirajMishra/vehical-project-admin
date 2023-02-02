@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('customer_mobile',200);
             $table->string('password');
             $table->string('customer_cpassword');
-            $table->tinyInteger('status')->default(0)->comment('0:block, 1:unblock');
+            $table->tinyInteger('status')->default(0)->comment('0:pending,1:booked,2:completed,3:cancelled,4:cancel');
             $table->string('user_type');
             $table->string('fcm_token',200)->nullable();           
             $table->timestamps();
@@ -29,4 +29,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('users');
     }
+    
 };

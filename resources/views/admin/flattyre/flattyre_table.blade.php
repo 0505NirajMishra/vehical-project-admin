@@ -18,6 +18,7 @@
     <th>longitute</th>
     <th>latitute</th>
     <th>description</th>
+    <th>status</th>
     <th>ACTION</th>
   </tr>
 
@@ -37,6 +38,21 @@
     <td>{{$user->longitude}}</td>
     <td>{{$user->latitude}}</td>
     <td>{{$user->description}}</td>
+    <td>
+        <a href="{{ url('/') }}/admin/flattyres/active/{{$user->flattyre_id}}/{{$user->status==0?1:($user->status==1?2:0)}}" data-id="`+ flattyre_id +`" title="Status" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+          <span class="svg-icon svg-icon-3">
+              <?php if ($user->status == 0): ?>
+                    <button type="button" class="btn btn-warning">Pending</button>
+              <?php elseif ($user->status == 1): ?>
+                    <button type="button" class="btn btn-success">Accept</button>
+              <?php elseif ($user->status == 2): ?>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+              <?php else: ?>
+                    <span>No Status Found</span>
+              <?php endif;?>
+          </span>
+        </a>
+    </td>
     <td>
         <a href="{{ url('/') }}/admin/flattyres/{{$user->flattyre_id}}/edit" title="Edit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" >
                     <span class="svg-icon svg-icon-3">

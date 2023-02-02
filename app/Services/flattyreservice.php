@@ -49,5 +49,11 @@ class flattyreservice
         $data = DB::table('flattyres')->orderBy('created_at', 'asc')->get();
         return $data;
     }
+
+    public static function status(array $data, $id)
+    {
+        $data = flattyre::where('flattyre_id', $id)->update($data);
+        return $data;
+    }
     
 }

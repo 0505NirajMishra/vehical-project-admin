@@ -23,6 +23,8 @@ class PetrolDesiel extends Model
        'location',
        'longitude',
        'latitude',
-       'description'
+       'description',
+       'status' 
     ];
+
 }

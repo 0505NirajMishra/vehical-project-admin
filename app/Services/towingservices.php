@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Services;
-
 use App\Models\Towing;
-
 use Illuminate\Support\Facades\DB;
 
 class towingservices
@@ -50,4 +48,11 @@ class towingservices
         $data = DB::table('towings')->orderBy('created_at', 'asc')->get();
         return $data;
     }
+
+    public static function status(array $data, $id)
+    {
+        $data = Towing::where('towing_id', $id)->update($data);
+        return $data;
+    }
+    
 }

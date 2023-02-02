@@ -72,7 +72,6 @@ class VehicalCategoryController extends Controller
 
         // $logo=FileService::multipleImageUploader($request,'vehical_logo','newvehicalfolder/image/');
         // $input['vehical_logo']= json_encode($logo);    
-
         // if($request->vehical_logo)
         // {
         //          foreach($request->file('vehical_logo') as $image)
@@ -82,7 +81,6 @@ class VehicalCategoryController extends Controller
         //                  $data[] = $name;
         //          }
         // }
-        
         // $input['vehical_logo'] = json_encode($data);
 
         $vehical_logo=[];

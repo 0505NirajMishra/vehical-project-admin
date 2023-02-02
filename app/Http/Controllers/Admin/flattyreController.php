@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\flattyreRequest;
 use App\Models\flattyre;
+use App\Models\User;
 use App\Models\VehicalCategory;
 use App\Services\flattyreservice;
+use App\Services\UserService;
 
 use App\Services\CustomerService;
 use App\Services\ManagerLanguageService;
@@ -139,4 +141,14 @@ class flattyreController extends Controller
 
     }
 
+    public function active($id, $status)
+    {
+        $update=array('status' => $status);
+        $result = flattyreservice::status($update,$id);
+        $storedata = flattyre::where('flattyre_id',$id)->first();             
+        $user = User::where('id',$storedata->user_id)->first();
+        $result = UserService::status($update,$storedata->user_id);
+        return redirect()->back()->withSuccess('Status Update Successfully!');
+    }
+    
 }

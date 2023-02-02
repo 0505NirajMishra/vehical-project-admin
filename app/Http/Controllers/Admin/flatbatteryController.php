@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\flatBatteryRequest;
 use App\Models\flatBattery;
+use App\Models\User;
+
 use App\Models\VehicalCategory;
 use App\Services\flatbatteryservice;
 
 use App\Services\CustomerService;
+use App\Services\UserService;
 use App\Services\ManagerLanguageService;
 use App\Services\UtilityService;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -157,4 +161,14 @@ class flatbatteryController extends Controller
 
     }
 
+    public function active($id, $status)
+    {
+        $update=array('status' => $status);
+        $result = flatbatteryservice::status($update,$id);
+        $storedata = flatBattery::where('flatbattery_id',$id)->first();             
+        $user = User::where('id',$storedata->user_id)->first();
+        $result = UserService::status($update,$storedata->user_id);
+        return redirect()->back()->withSuccess('Status Update Successfully!!!!');
+        
+    }
 }

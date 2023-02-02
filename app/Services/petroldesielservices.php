@@ -49,5 +49,13 @@ class petroldesielservices
         $data = DB::table('petroldesiels')->orderBy('created_at', 'asc')->get();
         return $data;
     }
+
+    public static function status(array $data, $id)
+    {
+        $data = PetrolDesiel::where('petrol_id', $id)->update($data);
+        return $data;
+    }
+
+    
     
 }

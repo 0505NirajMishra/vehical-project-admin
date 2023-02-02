@@ -109,6 +109,12 @@ class CAuthController extends Controller
         return $this->apiAuthService->getflattyrelist();
     }
 
+    // get user list 
+
+    public function changeuserstatus(){
+        return $this->apiAuthService->changeuserstatus();
+    }
+
     // get flatbattery List
 
     public function getFlatBatteryList(){

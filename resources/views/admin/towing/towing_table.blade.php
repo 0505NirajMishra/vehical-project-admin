@@ -17,11 +17,14 @@
     <th>Service Longitude</th>
     <th>Service Latitude</th>
     <th>Pickup and drop address</th>
+    <th>Status</th>
     <th>ACTION</th>
   </tr>
 
   @foreach($towing as $user)
+  
   <tr>
+    
     <td>{{$user->towing_id}}</td>
     <td>{{$user->vehical_type}}</td>
     <td>{{$user->description}}</td>
@@ -31,6 +34,21 @@
     <td>{{$user->service_longitude}}</td>
     <td>{{$user->service_latitude}}</td>
     <td>{{$user->picanddroaddress}}</td>
+
+    <td>
+        <a href="{{ url('/') }}/admin/towings/active/{{$user->towing_id}}/{{$user->status==0?1:($user->status==1?2:0)}}" data-id="`+ towing_id +`" title="Status" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+          <span class="svg-icon svg-icon-3">
+              <?php if ($user->status==0): ?>
+                    <button type="button" class="btn btn-warning">Pending</button>
+              <?php elseif ($user->status==1): ?>
+                    <button type="button" class="btn btn-success">Accept</button>
+              <?php elseif ($user->status==2): ?>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+              <?php endif; ?>
+          </span>
+        </a>
+    </td>
+
     <td>
         <a href="{{ url('/') }}/admin/towings/{{$user->towing_id}}/edit" title="Edit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" >
                     <span class="svg-icon svg-icon-3">

@@ -71,7 +71,22 @@
         </div>
 
     </div>
+    
+    <div class="row mb-6">
 
+        <label class="col-lg-2 col-form-label required fw-bold fs-6">{{ trans_choice('content.status_title', 1) }}</label>
+
+        <div class="col-lg-4 fv-row">
+            <select class="form-control form-control-solid" name="status">
+                    <option value="">Select Status</option>
+                    <option value="0">Pending</option>
+                    <option value="1">Accept</option>
+                    <option value="2">Cancel</option>
+            </select>
+        </div>
+
+    </div>
+    
 </div>
 <!--end::Card body-->
 

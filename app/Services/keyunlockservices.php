@@ -50,4 +50,12 @@ class keyunlockservices
         $data = DB::table('keyunlocks')->orderBy('created_at', 'asc')->get();
         return $data;
     }
+
+    public static function status(array $data, $id)
+    {
+        $data = Keyunlock::where('keyunlocks_id', $id)->update($data);
+        return $data;
+    }
+    
+
 }

@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TowingRequest;
 use App\Models\Towing;
+use App\Models\User;
+
 use App\Models\VehicalCategory;
 use App\Services\towingservices;
+use App\Services\UserService;
 
 use App\Services\CustomerService;
 use App\Services\ManagerLanguageService;
@@ -129,4 +132,17 @@ class towingController extends Controller
 
     }
 
+    public function active($id, $status)
+    {
+        $update=array('status' => $status);
+        $result = towingservices::status($update,$id);
+
+        $storedata = Towing::where('petrol_id',$id)->first();             
+        $user = User::where('id',$storedata->user_id)->first();
+        $result = UserService::status($update,$storedata->user_id);
+
+        return redirect()->back()->withSuccess('Status Update Successfully!');
+        
+    }
+    
 }
